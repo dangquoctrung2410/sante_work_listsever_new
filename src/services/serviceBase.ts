@@ -1,0 +1,68 @@
+import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios'
+import { store } from '../app/store'
+import { setAuth } from '../features/auth/authSlice'
+
+const TIMEOUT = 1 * 60 * 100000
+
+class ServiceBase {
+  service: AxiosInstance
+  constructor(baseURL: string) {
+    const service = axios.create({
+      headers: { csrf: 'token', 'Access-Control-Allow-Origin': '*' },
+      timeout: TIMEOUT,
+      baseURL,
+    })
+    service.interceptors.request.use(this.requestSuccess)
+    service.interceptors.response.use(this.handleSuccess, this.handleError)
+    this.service = service
+  }
+
+  requestSuccess = (config: any) => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+    return config
+  }
+
+  handleSuccess(response: AxiosResponse) {
+    return response.data
+  }
+
+  // logout = async () => {
+  //   try {
+  //     const response = await this.service.post('/api/Users/revoke-token')
+  //     console.log(response, 'response')
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  //   store.dispatch(setAuth(false))
+  // }
+
+  handleError = (error: AxiosError | undefined) => {
+    switch (error?.response?.status) {
+      case 401:
+        // store.dispatch(setAuth(false))
+        store.dispatch(setAuth({ isAuth: false, user: null }))
+        break
+      case 403:
+        // store.dispatch(setAuth(false))
+        break
+
+      default:
+        // this.redirectTo(document, '/500')
+        break
+    }
+    return Promise.reject(error)
+  }
+
+  redirectTo = (document: any, path: string) => {
+    document.location = path
+  }
+
+  request = (config: any) => {
+    return this.service(config)
+  }
+}
+
+export { ServiceBase }
