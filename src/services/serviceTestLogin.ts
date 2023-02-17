@@ -3,8 +3,8 @@ import { IResponse } from '../models/response.model'
 import { ServiceBase } from './serviceBase'
 
 class ServiceTestLogin extends ServiceBase {
-  constructor(baseURL: string) {
-    super(baseURL)
+  constructor(baseURL: string, onUnauthenticated: () => {}) {
+    super(baseURL, onUnauthenticated)
   }
 
   // get UserInfo

@@ -1,11 +1,5 @@
-import { ServiceTestLogin } from './serviceTestLogin'
+export interface IServicesManager {}
 
-export interface IServicesManager {
-  TestLogin: ServiceTestLogin
-}
-
-export const defaultServicesManager: IServicesManager = {
-  TestLogin: new ServiceTestLogin(''),
-}
+export const defaultServicesManager: IServicesManager = {}
 
 export const servicesManager: IServicesManager = defaultServicesManager

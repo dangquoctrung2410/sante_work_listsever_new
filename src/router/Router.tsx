@@ -1,36 +1,34 @@
-import { useLocation, Navigate, Route, Routes } from 'react-router-dom'
-function RequireAuth({ children }: { children: JSX.Element }) {
-  const auth = localStorage.getItem('token')
-  console.log(auth)
-
-  const location = useLocation()
-  if (!auth) {
-    return <Navigate to="/login" state={{ from: location }} replace={true} />
-  }
-
-  return children
-}
-
+import { Route } from 'react-router-dom'
+import { ErrorBoundaryRoutes } from '../components/error/ErrorBoundaryRoutes'
+import { AUTHORITIES } from '../constants/constants'
+import Admin from '../pages/Admin'
 import Home from '../pages/Home'
-import LoginPage from '../pages/LoginPage'
+import Login from '../pages/Login'
 import NotFound from '../pages/NotFound'
+import PrivateRouter from './PrivateRouter'
 
-type Props = {}
-
-const Router = (props: Props) => {
+const Router = () => {
   return (
-    <Routes>
+    <ErrorBoundaryRoutes>
       <Route
-        path="/"
+        index={true}
         element={
-          <RequireAuth>
+          <PrivateRouter hasAnyAuthorities={[AUTHORITIES.USER]}>
             <Home />
-          </RequireAuth>
+          </PrivateRouter>
         }
       />
-      <Route path="/login" element={<LoginPage />} />
+      <Route path="login" element={<Login />} />
+      <Route
+        path="admin/*"
+        element={
+          <PrivateRouter hasAnyAuthorities={[AUTHORITIES.ADMIN, AUTHORITIES.USER]}>
+            <Admin />
+          </PrivateRouter>
+        }
+      />
       <Route path="*" element={<NotFound />} />
-    </Routes>
+    </ErrorBoundaryRoutes>
   )
 }
 

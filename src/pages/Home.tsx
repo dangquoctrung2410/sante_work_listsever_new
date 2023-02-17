@@ -1,51 +1,38 @@
 type Props = {}
-import { useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
-import metadata from '../Release/metadata.json'
-import { useAppDispatch, useAuth } from '../app/hooks'
-import { setAuth } from '../features/auth/authSlice'
-import Language from '../features/language/Language'
-import Theme from '../features/theme/Theme'
-import { servicesManager } from '../services/serviceManager'
-
-function Home({}: Props) {
-  const auth = useAuth()
+// import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
+import Language from '../components/language/Language'
+import Theme from '../components/theme/Theme'
+import Translate from '../components/translate/Translate'
+import { setAuthentication } from '../reducers/slice/authSlice'
+import { useAppDispatch } from '../redux/store'
+import metadata from '../release/metadata.json'
+// import { servicesManager } from '../services/serviceManager'
+const colors = [
+  '--color-50',
+  '--color-100',
+  '--color-200',
+  '--color-300',
+  '--color-400',
+  '--color-500',
+  '--color-600',
+  '--color-700',
+  '--color-800',
+  '--color-900',
+  '--color-A100',
+  '--color-A200',
+  '--color-A400',
+  '--color-A700',
+]
+const Home = ({}: Props) => {
   const dispatch = useAppDispatch()
-  useEffect(() => {
-    fetchUserInfo()
-  }, [])
-
-  const fetchUserInfo = async () => {
-    const service = servicesManager.TestLogin
-    const response = await service.getUserInfo()
-    if (response.status === 1) {
-      dispatch(setAuth({ ...auth, user: response.data }))
-    }
-  }
-
-  const colors = [
-    '--color-50',
-    '--color-100',
-    '--color-200',
-    '--color-300',
-    '--color-400',
-    '--color-500',
-    '--color-600',
-    '--color-700',
-    '--color-800',
-    '--color-900',
-    '--color-A100',
-    '--color-A200',
-    '--color-A400',
-    '--color-A700',
-  ]
-  const { t, i18n } = useTranslation('common')
-  const navigate = useNavigate()
 
   return (
     <div>
-      <h1 className="version">{t('welcome.title', { framework: 'REACT' })}</h1>
+      <h1 className="version">
+        <Translate contentKey="welcome.title" />
+      </h1>
       <div className="version">{`Version ${metadata.version}`}</div>
       <div>
         {colors.map((i) => (
@@ -66,13 +53,20 @@ function Home({}: Props) {
         <Language />
         <button
           onClick={() => {
-            localStorage.removeItem('token')
-            dispatch(setAuth({ isAuth: false, user: null }))
-            navigate('/login')
+            dispatch(setAuthentication(false))
           }}
         >
           Logout
         </button>
+
+        <button
+          onClick={() => {
+            throw new Error('I crashed!')
+          }}
+        >
+          Throw error
+        </button>
+        <Link to={'admin'}>admin</Link>
       </div>
     </div>
   )

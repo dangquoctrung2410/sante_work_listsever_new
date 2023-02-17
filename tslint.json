@@ -17,17 +17,11 @@
         "endOfLine": "lf"
       }
     ],
-    "ordered-imports": [
-      true,
-      {
-        "import-sources-order": "lowercase-last",
-        "named-imports-order": "lowercase-first"
-      }
-    ],
+
     "prefer-switch": [true, { "min-cases": 2 }],
     "interface-name": [true, "always-prefix"],
     "prefer-for-of": false,
-    "only-arrow-functions": false,
+    "only-arrow-functions": true,
     "no-unused-expression": false,
     "no-implicit-dependencies": [true, "dev"],
     "max-line-length": {

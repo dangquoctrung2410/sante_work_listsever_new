@@ -1,20 +1,25 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios'
-import { store } from '../app/store'
-import { setAuth } from '../features/auth/authSlice'
+import { getLanguage } from '../localstorage/localstorage'
 
 const TIMEOUT = 1 * 60 * 100000
 
 class ServiceBase {
   service: AxiosInstance
-  constructor(baseURL: string) {
+  onUnauthenticated: () => {}
+  constructor(baseURL: string, onUnauthenticated: () => {}) {
     const service = axios.create({
-      headers: { csrf: 'token', 'Access-Control-Allow-Origin': '*' },
+      headers: {
+        csrf: 'token',
+        'Access-Control-Allow-Origin': '*',
+        'Accept-Language': getLanguage(),
+      },
       timeout: TIMEOUT,
       baseURL,
     })
     service.interceptors.request.use(this.requestSuccess)
     service.interceptors.response.use(this.handleSuccess, this.handleError)
     this.service = service
+    this.onUnauthenticated = onUnauthenticated
   }
 
   requestSuccess = (config: any) => {
@@ -42,15 +47,11 @@ class ServiceBase {
   handleError = (error: AxiosError | undefined) => {
     switch (error?.response?.status) {
       case 401:
-        // store.dispatch(setAuth(false))
-        store.dispatch(setAuth({ isAuth: false, user: null }))
-        break
       case 403:
-        // store.dispatch(setAuth(false))
+        this.onUnauthenticated()
         break
 
       default:
-        // this.redirectTo(document, '/500')
         break
     }
     return Promise.reject(error)
