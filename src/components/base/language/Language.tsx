@@ -1,7 +1,7 @@
-import i18n from '../../i18n'
-import languagekey from '../../mocks/ISO-639-1-language.json'
-import { setLanguge } from '../../reducers/slice/themeLanguageSlice'
-import { RootState, useAppDispatch, useAppSelector } from '../../redux/store'
+import i18n from '../../../i18n'
+import languagekey from '../../../mocks/ISO-639-1-language.json'
+import { setLanguge } from '../../../reducers/slice/themeLanguageSlice'
+import { RootState, useAppDispatch, useAppSelector } from '../../../redux/store'
 type Props = {}
 
 const Language = (_props: Props) => {

@@ -1,5 +1,5 @@
 import { Link, Route } from 'react-router-dom'
-import { ErrorBoundaryRoutes } from '../components/error/ErrorBoundaryRoutes'
+import { ErrorBoundaryRoutes } from '../components/base/error/ErrorBoundaryRoutes'
 
 type Props = {}
 

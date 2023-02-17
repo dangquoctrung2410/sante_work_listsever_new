@@ -1,14 +1,11 @@
 type Props = {}
-// import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-// import { useNavigate } from 'react-router-dom'
-import Language from '../components/language/Language'
-import Theme from '../components/theme/Theme'
-import Translate from '../components/translate/Translate'
+import Language from '../components/base/language/Language'
+import Theme from '../components/base/theme/Theme'
+import Translate from '../components/base/translate/Translate'
 import { setAuthentication } from '../reducers/slice/authSlice'
 import { useAppDispatch } from '../redux/store'
 import metadata from '../release/metadata.json'
-// import { servicesManager } from '../services/serviceManager'
 const colors = [
   '--color-50',
   '--color-100',

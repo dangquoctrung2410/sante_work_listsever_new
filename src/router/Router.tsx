@@ -1,5 +1,5 @@
 import { Route } from 'react-router-dom'
-import { ErrorBoundaryRoutes } from '../components/error/ErrorBoundaryRoutes'
+import { ErrorBoundaryRoutes } from '../components/base/error/ErrorBoundaryRoutes'
 import { AUTHORITIES } from '../constants/constants'
 import Admin from '../pages/Admin'
 import Home from '../pages/Home'

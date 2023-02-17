@@ -1,6 +1,6 @@
 import { createSearchParams, Navigate, RouteProps, useLocation } from 'react-router-dom'
-import ErrorBoundary from '../components/error/ErrorBoundary'
-import Translate from '../components/translate/Translate'
+import ErrorBoundary from '../components/base/error/ErrorBoundary'
+import Translate from '../components/base/translate/Translate'
 import { useAppSelector } from '../redux/store'
 
 export const hasAnyAuthority = (authorities: Array<string>, hasAnyAuthorities: Array<string>) => {

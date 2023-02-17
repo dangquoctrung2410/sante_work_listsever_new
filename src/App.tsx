@@ -6,17 +6,17 @@ import { I18nextProvider } from 'react-i18next'
 import Router from './router/Router'
 
 import { useEffect } from 'react'
-import ErrorBoundry from './components/error/ErrorBoundary'
+import ErrorBoundry from './components/base/error/ErrorBoundary'
 import i18n from './i18n'
 import { setLanguge } from './reducers/slice/themeLanguageSlice'
 import { RootState, useAppDispatch, useAppSelector } from './redux/store'
-import LoadingBar from './components/loading/LoadingBar'
 import './App.scss'
 import 'antd/dist/reset.css'
 import './theme/default-theme.scss'
 import './theme/pink-theme.scss'
 import './theme/purple-theme.scss'
 import './theme/red-theme.scss'
+import LoadingBar from './components/base/loading/LoadingBar'
 const App = () => {
   const theme = useAppSelector((state: RootState) => state.themeLanguage.theme)
   const dispatch = useAppDispatch()

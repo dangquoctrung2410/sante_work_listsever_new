@@ -1,5 +1,5 @@
 import { Spin } from 'antd'
-import { RootState, useAppSelector } from '../../redux/store'
+import { RootState, useAppSelector } from '../../../redux/store'
 
 type Props = {}
 

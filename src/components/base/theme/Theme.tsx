@@ -1,5 +1,5 @@
-import { setTheme } from '../../reducers/slice/themeLanguageSlice'
-import { RootState, useAppDispatch, useAppSelector } from '../../redux/store'
+import { setTheme } from '../../../reducers/slice/themeLanguageSlice'
+import { RootState, useAppDispatch, useAppSelector } from '../../../redux/store'
 
 type Props = {}
 
