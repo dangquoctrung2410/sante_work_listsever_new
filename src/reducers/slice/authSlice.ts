@@ -24,11 +24,9 @@ const authSlice = createSlice({
     builder
       .addCase(authenticate.rejected, (state) => ({
         ...state,
-        loading: true,
       }))
       .addCase(authenticate.fulfilled, (state, _action) => ({
         ...state,
-        loading: false,
         isAuthenticated: true,
         account: {
           authorities: [AUTHORITIES.USER],
@@ -36,7 +34,6 @@ const authSlice = createSlice({
       }))
       .addCase(authenticate.pending, (state) => ({
         ...state,
-        loading: true,
       }))
   },
 })

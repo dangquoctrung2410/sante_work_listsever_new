@@ -1,0 +1,22 @@
+.memory {
+  width: 100%;
+  height: 70px;
+  margin-top: 5px;
+  margin-left: 5px;
+  padding: 5px;
+  background-color: #dddd;
+
+  .col {
+    padding: 5px;
+    .chart {
+      border: 1px solid #c41d7f;
+    }
+    .largeTitle {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .smallTitle {
+      font-size: 12px;
+    }
+  }
+}

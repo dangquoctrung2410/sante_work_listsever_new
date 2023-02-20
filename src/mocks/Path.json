@@ -3,9 +3,12 @@
     "url": "/"
   },
   "admin": {
-    "url": "/admin"
+    "url": "admin/*"
+  },
+  "monitor": {
+    "url": "monitor/*"
   },
   "login": {
-    "url": "/login"
+    "url": "login"
   }
 }

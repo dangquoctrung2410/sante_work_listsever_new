@@ -23,7 +23,6 @@ class ErrorBoundary extends Component<Props, State> {
     })
   }
   render() {
-    console.log(this.state.errorInfo)
     const { error, errorInfo } = this.state
     if (errorInfo) {
       const errorDetails = (

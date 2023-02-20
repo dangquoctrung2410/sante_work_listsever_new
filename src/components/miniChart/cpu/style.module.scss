@@ -1,0 +1,20 @@
+.cpu {
+  width: 100%;
+  height: 70px;
+  margin-top: 5px;
+  margin-left: 5px;
+  padding: 5px;
+  .col {
+    padding: 5px;
+    .chart {
+      border: 1px solid #0958d9;
+    }
+    .largeTitle {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .smallTitle {
+      font-size: 12px;
+    }
+  }
+}

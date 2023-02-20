@@ -9,11 +9,8 @@ class ServiceMonitor extends ServiceBase {
 
   // get UserInfo
   getMonitor = async () => {
-    const url = '/api/monitor'
+    const url = '/monitor/performance'
     const response: IResponse<any> = await this.service.get(url)
-    if (response.status !== 1) {
-      return
-    }
     return response.data
   }
 
@@ -21,10 +18,6 @@ class ServiceMonitor extends ServiceBase {
   login = async (data: IPostLogin) => {
     const url = '/authenticate/login'
     const response: IResponse<any> = await this.service.post(url, data)
-    console.log(response)
-    if (response.status !== 1) {
-      throw new Error(response.message)
-    }
     return response
   }
 }
