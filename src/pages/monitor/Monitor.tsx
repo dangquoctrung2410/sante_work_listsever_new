@@ -1,18 +1,24 @@
-import { useEffect } from 'react'
-import Cpu from '../../components/miniChart/cpu/Cpu'
-import Disk from '../../components/miniChart/disk/Disk'
-import Memory from '../../components/miniChart/memory/Memory'
-import Network from '../../components/miniChart/network/Network'
-import { getPerformance } from '../../reducers/slice/monitorSlice'
-import { useAppDispatch } from '../../redux/store'
-import styleModule from './style.module.scss'
-type Props = {}
+import { useEffect } from 'react';
+import Cpu from '../../components/miniChart/cpu/Cpu';
+import Disk from '../../components/miniChart/disk/Disk';
+import Memory from '../../components/miniChart/memory/Memory';
+import Network from '../../components/miniChart/network/Network';
+import { getPerformance } from '../../reducers/slice/monitorSlice';
+import { useAppDispatch } from '../../redux/store';
+import styleModule from './style.module.scss';
+type Props = {};
 
 const Monitor = (_props: Props) => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
+  let interval: NodeJS.Timeout | null | undefined = null;
   useEffect(() => {
-    dispatch(getPerformance())
-  }, [])
+    dispatch(getPerformance());
+
+    interval && clearInterval(interval);
+    interval = setInterval(() => {
+      dispatch(getPerformance());
+    }, 5000);
+  }, []);
 
   return (
     <div className={styleModule.monitor}>
@@ -21,17 +27,12 @@ const Monitor = (_props: Props) => {
           <Cpu />
           <Memory />
           <Disk />
-          <Disk />
-          <Disk />
-          <Network />
-          <Network />
-          <Network />
           <Network />
         </div>
         <div className={styleModule.main}>Content</div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Monitor
+export default Monitor;
