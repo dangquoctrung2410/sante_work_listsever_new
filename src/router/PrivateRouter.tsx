@@ -1,6 +1,7 @@
 import { createSearchParams, Navigate, RouteProps, useLocation } from 'react-router-dom'
 import ErrorBoundary from '../components/base/error/ErrorBoundary'
-import Translate from '../components/base/translate/Translate'
+import path from '../mocks/Path.json'
+import NotAuthorized from '../pages/403/NotAuthorized'
 import { useAppSelector } from '../redux/store'
 
 export const hasAnyAuthority = (authorities: Array<string>, hasAnyAuthorities: Array<string>) => {
@@ -37,19 +38,13 @@ const PrivateRouter = ({ children, hasAnyAuthorities = [], ...rest }: IOwnProps)
       return <ErrorBoundary>{children}</ErrorBoundary>
     }
 
-    return (
-      <div className="insufficient-authority">
-        <div className="alert alert-danger">
-          <Translate contentKey="error.http.403" />
-        </div>
-      </div>
-    )
+    return <NotAuthorized />
   }
 
   return (
     <Navigate
       to={{
-        pathname: `/login`,
+        pathname: path.login.url,
         search: createSearchParams({
           return: location.pathname,
         }).toString(),

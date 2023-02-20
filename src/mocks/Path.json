@@ -1,14 +1,11 @@
 {
   "home": {
-    "url": "/",
-    "private": true
+    "url": "/"
   },
   "admin": {
-    "url": "/admin",
-    "private": true
+    "url": "/admin"
   },
   "login": {
-    "url": "/login",
-    "private": false
+    "url": "/login"
   }
 }

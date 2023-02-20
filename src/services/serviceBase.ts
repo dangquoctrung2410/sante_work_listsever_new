@@ -11,7 +11,6 @@ class ServiceBase {
       headers: {
         csrf: 'token',
         'Access-Control-Allow-Origin': '*',
-        'Accept-Language': getLanguage(),
       },
       timeout: TIMEOUT,
       baseURL,
@@ -24,6 +23,7 @@ class ServiceBase {
 
   requestSuccess = (config: any) => {
     const token = localStorage.getItem('token')
+    config.headers['Accept-Language'] = getLanguage()
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
     }
@@ -54,7 +54,7 @@ class ServiceBase {
       default:
         break
     }
-    return Promise.reject(error)
+    return error?.response ? Promise.reject(error?.response.data) : Promise.reject(error)
   }
 
   redirectTo = (document: any, path: string) => {

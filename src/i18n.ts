@@ -3,8 +3,8 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 import Backend from 'i18next-http-backend'
 import { initReactI18next } from 'react-i18next'
 import { defaultThemeLanguage } from './models/reducers/themeLanguage.model'
-import de from './translations/de/translation.json'
 import en from './translations/en/translation.json'
+import vi from './translations/vi/translation.json'
 
 i18n
   .use(Backend)
@@ -18,12 +18,11 @@ i18n
       escapeValue: false,
     },
     resources: {
+      vi: {
+        translation: vi,
+      },
       en: {
         translation: en,
-        login: en,
-      },
-      de: {
-        translation: de,
       },
     },
     backend: {

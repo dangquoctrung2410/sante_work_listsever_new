@@ -11,7 +11,7 @@ export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), ...middleWare],
 })
-
+export const getStore = () => store
 export type RootState = ReturnType<typeof rootReducer>
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 export const useAppDispatch = () => useDispatch<any>()

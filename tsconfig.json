@@ -22,6 +22,6 @@
     "outDir": "dist",
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "webpack.config.js"],
+  "include": ["src", "webpack.config.js", "src/pages/403/.tsx"],
   "typeRoots": ["./node_modules/@types", "./src/@types"]
 }

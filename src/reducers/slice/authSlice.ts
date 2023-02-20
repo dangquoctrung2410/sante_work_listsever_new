@@ -1,16 +1,15 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AUTHORITIES } from '../../constants/constants'
+import { IPostLogin } from '../../models/login.model'
 // import axios from 'axios'
 import { defaultAuth, IAuth } from '../../models/reducers/auth.model'
+import { servicesManager } from '../../services/serviceManager'
 
 const initialState: IAuth = defaultAuth
 
-export const authenticate = createAsyncThunk('auth/login', async () => {
-  return new Promise<any>((_resolve, reject) => {
-    setTimeout(() => {
-      reject(123)
-    }, 3000)
-  })
+export const authenticate = createAsyncThunk('auth/login', async (data: IPostLogin) => {
+  const service = servicesManager.serviceMonitor
+  return service?.login(data)
 })
 
 const authSlice = createSlice({

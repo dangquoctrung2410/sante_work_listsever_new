@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import i18n from '../../i18n'
+import { saveLanguage } from '../../localstorage/localstorage'
 import { defaultThemeLanguage, IThemeLanguage } from '../../models/reducers/themeLanguage.model'
 
 const initialState: IThemeLanguage = defaultThemeLanguage
@@ -14,6 +15,7 @@ export const themeLanguageSlice = createSlice({
     setLanguge: (state, action: PayloadAction<string>) => {
       state.language = action.payload
       i18n.changeLanguage(action.payload)
+      saveLanguage(action.payload)
     },
   },
 })

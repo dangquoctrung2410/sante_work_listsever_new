@@ -16,22 +16,27 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: any, errorInfo: any) {
-    console.log(error)
+    console.log(error, errorInfo)
     this.setState({
       error,
       errorInfo,
     })
   }
   render() {
-    if (this.state.errorInfo) {
+    console.log(this.state.errorInfo)
+    const { error, errorInfo } = this.state
+    if (errorInfo) {
+      const errorDetails = (
+        <details className="preserve-space">
+          {error && error.toString()}
+          <br />
+          {errorInfo.componentStack}
+        </details>
+      )
       return (
         <div>
-          <h2>Something went wrong.</h2>
-          <details style={{ whiteSpace: 'pre-wrap' }}>
-            {this.state.error && this.state.error.toString()}
-            <br />
-            {this.state.errorInfo.componentStack}
-          </details>
+          <h2 className="error">An unexpected error has occurred.</h2>
+          {errorDetails}
         </div>
       )
     }

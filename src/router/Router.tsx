@@ -3,8 +3,8 @@ import { ErrorBoundaryRoutes } from '../components/base/error/ErrorBoundaryRoute
 import { AUTHORITIES } from '../constants/constants'
 import Admin from '../pages/Admin'
 import Home from '../pages/Home'
-import Login from '../pages/Login'
-import NotFound from '../pages/NotFound'
+import Login from '../pages/login/Login'
+import NotFound from '../pages/404/NotFound'
 import PrivateRouter from './PrivateRouter'
 
 const Router = () => {
