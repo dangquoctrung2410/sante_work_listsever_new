@@ -1,5 +1,8 @@
 export interface IThemeLanguage {
-  theme: string
-  language: string
+  theme: { dark: boolean; color: string; name: string };
+  language: string;
 }
-export const defaultThemeLanguage: IThemeLanguage = { theme: 'purple', language: 'vi' }
+export const defaultThemeLanguage: IThemeLanguage = {
+  theme: { dark: true, color: '#1677ff', name: 'default' },
+  language: 'vi',
+};

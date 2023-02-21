@@ -1,8 +1,9 @@
-import { Col, Row, Space, Spin } from 'antd';
-import { ResponsiveContainer, Area, AreaChart, YAxis } from 'recharts';
-import { RootState, useAppSelector } from '../../../redux/store';
+import { Col, Row, Skeleton, Space, Typography } from 'antd';
 import { useEffect, useState } from 'react';
+import { Area, AreaChart, ResponsiveContainer, YAxis } from 'recharts';
+import { RootState, useAppSelector } from '../../../redux/store';
 import styleModule from './style.module.scss';
+const { Text } = Typography;
 
 type Props = {};
 
@@ -28,11 +29,7 @@ const Memory = (_props: Props) => {
     }
   }, [memoryData]);
   if (!memoryData) {
-    return (
-      <Row className={styleModule.memory}>
-        <Spin />
-      </Row>
-    );
+    return <Skeleton active={true} />;
   }
   return (
     <Row className={styleModule.memory}>
@@ -63,20 +60,22 @@ const Memory = (_props: Props) => {
       </Col>
       <Col span={15} className={styleModule.col}>
         <Row>
-          <Space className={styleModule.largeTitle}>
-            <span>Memory</span>
+          <Space>
+            <Text className={styleModule.largeTitle} ellipsis={true}>
+              Memory
+            </Text>
           </Space>
         </Row>
         <Row>
           <Space>
-            <span className={styleModule.smallTitle}>
+            <Text ellipsis={true} className={styleModule.smallTitle}>
               {(
                 (memoryData.data.totalmem - memoryData.data.freemem) /
                 Math.pow(1024, 3)
               ).toFixed(1)}
               /{(memoryData.data.totalmem / Math.pow(1024, 3)).toFixed(1)} GB
-            </span>
-            <span className={styleModule.smallTitle}>
+            </Text>
+            <Text ellipsis={true} className={styleModule.smallTitle}>
               (
               {Math.round(
                 ((memoryData.data.totalmem - memoryData.data.freemem) /
@@ -84,7 +83,7 @@ const Memory = (_props: Props) => {
                   100,
               )}
               %)
-            </span>
+            </Text>
           </Space>
         </Row>
       </Col>

@@ -1,17 +1,34 @@
-import Cpu from '../../../components/miniChart/cpu/Cpu';
-import Disk from '../../../components/miniChart/disk/Disk';
-import Memory from '../../../components/miniChart/memory/Memory';
-import Network from '../../../components/miniChart/network/Network';
+import { theme } from 'antd';
 
-type Props = {};
+const { useToken } = theme;
 
-const SiderLeft = (_props: Props) => {
+type Props = {
+  tabs: Array<any>;
+  onTabChange(key: string): void;
+};
+
+const SiderLeft = (props: Props) => {
+  const { token } = useToken();
   return (
     <>
-      <Cpu />
-      <Memory />
-      <Disk />
-      <Network />
+      {props.tabs.map((tab) => {
+        return (
+          <div
+            onClick={() => props.onTabChange(tab.key)}
+            key={tab.key}
+            style={{
+              padding: 5,
+              background: tab.active ? token.colorPrimaryBg : undefined,
+              pointerEvents: !tab.disable ? 'all' : 'none',
+              cursor: !tab.disable ? 'pointer' : 'none',
+              textOverflow: 'ellipsis',
+              overflow: 'hidden',
+            }}
+          >
+            {tab.label}
+          </div>
+        );
+      })}
     </>
   );
 };

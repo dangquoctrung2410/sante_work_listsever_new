@@ -8,8 +8,8 @@ $siderLeftWidth: 250px;
 .app {
   width: 100%;
   height: 100vh;
-  background-color: var(--color-50);
-
+  background-color: var(--colorBgBase);
+  color: var(--colorTextBase) !important;
   .monitor {
     width: 100%;
     height: 100%;

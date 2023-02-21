@@ -1,8 +1,10 @@
-import { Col, Row, Space, Spin } from 'antd';
-import { ResponsiveContainer, Area, AreaChart, YAxis } from 'recharts';
+import { Col, Row, Skeleton, Space, Typography } from 'antd';
+import { useEffect, useState } from 'react';
+import { Area, AreaChart, ResponsiveContainer, YAxis } from 'recharts';
 import { RootState, useAppSelector } from '../../../redux/store';
 import styleModule from './style.module.scss';
-import { useEffect, useState } from 'react';
+const { Text } = Typography;
+
 type Props = {};
 
 const Cpu = (_props: Props) => {
@@ -19,14 +21,9 @@ const Cpu = (_props: Props) => {
     }
   }, [cpuData]);
   if (!cpuData) {
-    return (
-      <Row className={styleModule.cpu}>
-        <Spin />
-      </Row>
-    );
+    return <Skeleton active={true} />;
   }
 
-  console.log(data);
   return (
     <Row className={styleModule.cpu}>
       <Col span={9} className={styleModule.col}>
@@ -56,13 +53,17 @@ const Cpu = (_props: Props) => {
       </Col>
       <Col span={15} className={styleModule.col}>
         <Row>
-          <Space className={styleModule.largeTitle}>
-            <span>CPU</span>
+          <Space>
+            <Text ellipsis={true} className={styleModule.largeTitle}>
+              CPU
+            </Text>
           </Space>
         </Row>
         <Row>
-          <Space className={styleModule.smallTitle}>
-            <span>{cpuData.data.avgCPUsLogicUsed || 0}%</span>
+          <Space>
+            <Text ellipsis={true} className={styleModule.smallTitle}>
+              {cpuData.data.avgCPUsLogicUsed || 0}%
+            </Text>
           </Space>
         </Row>
       </Col>

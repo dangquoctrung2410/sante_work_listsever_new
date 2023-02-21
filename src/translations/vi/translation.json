@@ -12,5 +12,17 @@
       "username": "Vui lòng nhập tên người dùng của bạn!",
       "password": "Vui lòng nhập mật khẩu của bạn!"
     }
+  },
+  "monitor": {
+    "cpu": {
+      "utilisation": "Tình trạng sử dụng",
+      "speed": "Tốc độ",
+      "upTime": "Thời gian hoạt động"
+    },
+    "memory": {
+      "free": "Trống",
+      "used": "Đã dùng",
+      "total": "Tổng"
+    }
   }
 }

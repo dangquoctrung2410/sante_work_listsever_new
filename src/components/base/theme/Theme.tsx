@@ -1,29 +1,30 @@
 import { Select } from 'antd';
-import { setTheme } from '../../../reducers/slice/themeLanguageSlice';
+import { setThemeColor } from '../../../reducers/slice/themeLanguageSlice';
 import {
   RootState,
   useAppDispatch,
   useAppSelector,
 } from '../../../redux/store';
+import listTheme from '../../../mocks/Themes.json';
 
 type Props = {};
 
 const Theme = (_props: Props) => {
-  const theme = useAppSelector((state: RootState) => state.themeLanguage.theme);
+  const theme = useAppSelector(
+    (state: RootState) => state.themeLanguage.theme.color,
+  );
   const dispatch = useAppDispatch();
+  listTheme.forEach((element: any, idx) => {
+    element.key = idx;
+    return element;
+  });
   return (
     <Select
       value={theme}
       onChange={(value: any) => {
-        dispatch(setTheme(value));
+        dispatch(setThemeColor(value));
       }}
-      options={[
-        { value: 'default', label: 'Default Theme' },
-        { value: 'light', label: 'Light Theme' },
-        { value: 'red', label: 'Red Theme' },
-        { value: 'purple', label: 'Purple Theme' },
-        { value: 'pink', label: 'Pink theme' },
-      ]}
+      options={listTheme}
     />
   );
 };

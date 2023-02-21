@@ -1,8 +1,9 @@
-import { Col, Row, Space, Spin } from 'antd';
-import { ResponsiveContainer, Area, AreaChart } from 'recharts';
-import { RootState, useAppSelector } from '../../../redux/store';
+import { Col, Row, Skeleton, Space, Typography } from 'antd';
 import { useEffect, useState } from 'react';
+import { Area, AreaChart, ResponsiveContainer } from 'recharts';
+import { RootState, useAppSelector } from '../../../redux/store';
 import styleModule from './style.module.scss';
+const { Text } = Typography;
 
 type Props = {};
 
@@ -26,11 +27,7 @@ const Network = (_props: Props) => {
   }, [networkData]);
 
   if (!networkData) {
-    return (
-      <Row className={styleModule.disk}>
-        <Spin />
-      </Row>
-    );
+    return <Skeleton active={true} />;
   }
 
   return (
@@ -69,13 +66,17 @@ const Network = (_props: Props) => {
             </Col>
             <Col span={15} className={styleModule.col}>
               <Row>
-                <Space className={styleModule.largeTitle}>
-                  <span>{key}</span>
+                <Space>
+                  <Text ellipsis={true} className={styleModule.largeTitle}>
+                    {key}
+                  </Text>
                 </Space>
               </Row>
               <Row>
-                <Space className={styleModule.smallTitle}>
-                  <span>{ipv4.address || '0.0.0.0'}</span>
+                <Space>
+                  <Text ellipsis={true} className={styleModule.smallTitle}>
+                    {ipv4.address || '0.0.0.0'}
+                  </Text>
                 </Space>
               </Row>
             </Col>

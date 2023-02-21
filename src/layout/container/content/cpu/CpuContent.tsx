@@ -1,4 +1,4 @@
-import { Col, Row, Space, Spin, Typography } from 'antd';
+import { Col, Row, Skeleton, Space, Typography } from 'antd';
 import {
   Area,
   AreaChart,
@@ -6,11 +6,12 @@ import {
   ResponsiveContainer,
   YAxis,
 } from 'recharts';
+import Translate from '../../../../components/base/translate/Translate';
 import { RootState, useAppSelector } from '../../../../redux/store';
 import { convertMsToTime } from '../../../../utils/convertMstoTime';
 import { middlePatriot } from '../../../../utils/middlePatriot';
 import styleModule from './style.module.scss';
-
+const { Title, Text } = Typography;
 type Props = {};
 
 const CpuContent = (_props: Props) => {
@@ -19,26 +20,20 @@ const CpuContent = (_props: Props) => {
   const uptimeData = monitorData.find((item: any) => item.key === 'uptime');
 
   if (!cpuData) {
-    return (
-      <Row className={styleModule.cpu}>
-        <Spin />
-      </Row>
-    );
+    return <Skeleton active={true} />;
   }
-
   const numCpu = cpuData.data.cpusLogicUsed.length;
   const middle = middlePatriot(numCpu);
   const col = middle;
   const row = numCpu / middle;
-  console.log(uptimeData);
   return (
     <div className={styleModule.cpuContent}>
       <div className={styleModule.cpuTitle}>
         <Space>
-          <Typography.Title level={3}>CPU</Typography.Title>
+          <Title level={3}>CPU</Title>
         </Space>
         <Space style={{ float: 'right', fontSize: 15 }}>
-          {cpuData.data.model}
+          <Text>{cpuData.data.model}</Text>
         </Space>
       </div>
       <div className={styleModule.cpuMain}>
@@ -93,24 +88,30 @@ const CpuContent = (_props: Props) => {
         <div className={styleModule.infoCpu}>
           <Row>
             <Col span={8}>
-              <Typography.Title level={5}>
-                <div>Utilisation</div>
+              <Title level={5}>
+                <div>
+                  <Translate contentKey="monitor.cpu.utilisation" />
+                </div>
                 <div>{cpuData.data.avgCPUsLogicUsed || 0}%</div>
-              </Typography.Title>
+              </Title>
             </Col>
             <Col span={8}>
-              <Typography.Title level={5}>
-                <div>Speed</div>
-                <div>{cpuData.data.speed}HZ</div>
-              </Typography.Title>
+              <Title level={5}>
+                <div>
+                  <Translate contentKey="monitor.cpu.speed" />
+                </div>
+                <div>{cpuData.data.speed / 1000}GHZ</div>
+              </Title>
             </Col>
             <Col span={8}>
-              <Typography.Title level={5}>
-                <div>Up time</div>
+              <Title level={5}>
+                <div>
+                  <Translate contentKey="monitor.cpu.upTime" />
+                </div>
                 {uptimeData && uptimeData.data && (
                   <div>{convertMsToTime(uptimeData.data)}</div>
                 )}
-              </Typography.Title>
+              </Title>
             </Col>
           </Row>
         </div>

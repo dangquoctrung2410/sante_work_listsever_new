@@ -2,7 +2,6 @@ const middlePatriot = (a: number) => {
   const b = [];
   for (let index = 0; index < a; index++) {
     if (a % index === 0) {
-      console.log(index);
       b.push(index);
     }
   }

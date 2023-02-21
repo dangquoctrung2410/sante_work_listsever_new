@@ -1,7 +1,8 @@
-import { Col, Row, Space, Spin } from 'antd';
-import { ResponsiveContainer, Area, AreaChart, YAxis } from 'recharts';
+import { Col, Row, Skeleton, Space, Typography } from 'antd';
+import { Area, AreaChart, ResponsiveContainer, YAxis } from 'recharts';
 import { RootState, useAppSelector } from '../../../redux/store';
 import styleModule from './style.module.scss';
+const { Text } = Typography;
 
 type Props = {};
 
@@ -10,11 +11,7 @@ const Disk = (_props: Props) => {
   const diskData = monitorData.find((item: any) => item.key === 'disk');
 
   if (!diskData) {
-    return (
-      <Row className={styleModule.disk}>
-        <Spin />
-      </Row>
-    );
+    return <Skeleton active={true} />;
   }
   return (
     <>
@@ -49,24 +46,22 @@ const Disk = (_props: Props) => {
             </Col>
             <Col span={15} className={styleModule.col}>
               <Row>
-                <Space className={styleModule.largeTitle}>
-                  <span>
+                <Space>
+                  <Text ellipsis={true} className={styleModule.largeTitle}>
                     Disk {++idx} ({disk.Mounted})
-                  </span>
+                  </Text>
                 </Space>
               </Row>
               <Row>
-                <Space className={styleModule.smallTitle}>
-                  <span>
-                    {(disk.Used / Math.pow(1024, 3)).toFixed(1)}/
-                    {(disk.Blocks / Math.pow(1024, 3)).toFixed(1)}GB
-                  </span>
-                </Space>
+                <Text ellipsis={true} className={styleModule.smallTitle}>
+                  {(disk.Used / Math.pow(1024, 3)).toFixed(1)}/
+                  {(disk.Blocks / Math.pow(1024, 3)).toFixed(1)}GB
+                </Text>
               </Row>
               <Row>
-                <Space className={styleModule.smallTitle}>
-                  <span>{disk.Capacity}</span>
-                </Space>
+                <Text ellipsis={true} className={styleModule.smallTitle}>
+                  {disk.Capacity}
+                </Text>
               </Row>
             </Col>
           </Row>

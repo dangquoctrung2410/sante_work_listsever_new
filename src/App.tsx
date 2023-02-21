@@ -5,11 +5,14 @@ import { I18nextProvider } from 'react-i18next';
 // import metadata from './release/metadata.json'
 import Router from './router/Router';
 
-import { ConfigProvider, theme } from 'antd';
+import { ConfigProvider, Layout, theme, Typography } from 'antd';
 import { useEffect } from 'react';
 import Language from './components/base/language/Language';
 import LoadingTopBar from './components/base/loading/LoadingTopBar';
+// import Theme from './components/base/theme/Theme';
+import 'antd/dist/reset.css';
 import Theme from './components/base/theme/Theme';
+import ThemeMode from './components/base/theme/ThemeMode';
 import i18n from './i18n';
 import { setLanguge } from './reducers/slice/themeLanguageSlice';
 import {
@@ -20,20 +23,12 @@ import {
 } from './redux/store';
 import { serviceConfig } from './services/serviceManager';
 import styleModule from './style.module.scss';
-import 'antd/dist/reset.css';
-import './theme/default-theme.scss';
-import './theme/light-theme.scss';
-import './theme/pink-theme.scss';
-import './theme/purple-theme.scss';
-import './theme/red-theme.scss';
-import { generate } from '@ant-design/colors';
+const { Text } = Typography;
 const { defaultAlgorithm, darkAlgorithm } = theme;
 const App = () => {
-  const colors = generate('#0c356f', {
-    theme: 'dark',
-  });
-  console.log(colors);
-  const theme = useAppSelector((state: RootState) => state.themeLanguage.theme);
+  const themeData = useAppSelector(
+    (state: RootState) => state.themeLanguage.theme,
+  );
   const dispatch = useAppDispatch();
   useEffect(() => {
     serviceConfig(getStore());
@@ -43,27 +38,31 @@ const App = () => {
   return (
     <ConfigProvider
       theme={{
-        algorithm: theme === 'light' ? darkAlgorithm : defaultAlgorithm,
+        algorithm: themeData.dark ? darkAlgorithm : defaultAlgorithm,
         token: {
-          colorPrimary: '#0c356f',
+          colorPrimary: themeData.color,
+          borderRadius: 4,
         },
       }}
     >
       <I18nextProvider i18n={i18n}>
-        <div className={styleModule.app} data-theme={theme}>
-          <LoadingTopBar />
-          <div className={styleModule.monitor}>
+        <div className={styleModule.app}>
+          <Layout className={styleModule.monitor}>
+            <LoadingTopBar />
             <div className={styleModule.header}>
               <Language />
               <Theme />
+              <ThemeMode />
             </div>
             <div className={styleModule.container}>
               <div className={styleModule.main}>
                 <Router />
               </div>
             </div>
-            <div className={styleModule.footer}>Footer</div>
-          </div>
+            <div className={styleModule.footer}>
+              <Text>Footer</Text>
+            </div>
+          </Layout>
         </div>
       </I18nextProvider>
     </ConfigProvider>
