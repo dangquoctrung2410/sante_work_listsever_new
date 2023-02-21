@@ -1,5 +1,5 @@
 import { Col, Row, Space, Spin } from 'antd';
-import { ResponsiveContainer, Area, AreaChart } from 'recharts';
+import { ResponsiveContainer, Area, AreaChart, YAxis } from 'recharts';
 import { RootState, useAppSelector } from '../../../redux/store';
 import styleModule from './style.module.scss';
 import { useEffect, useState } from 'react';
@@ -13,7 +13,7 @@ const Cpu = (_props: Props) => {
     if (cpuData) {
       const dataTemp = [...data, { percent: cpuData.data.avgCPUsLogicUsed }];
       if (dataTemp.length > 10) {
-        dataTemp.pop();
+        dataTemp.shift();
       }
       cpuData && setData(dataTemp);
     }
@@ -50,6 +50,7 @@ const Cpu = (_props: Props) => {
               stroke="#0958d9"
               fill="#e6f4ff"
             />
+            <YAxis hide={true} type="number" domain={[0, 100]} />
           </AreaChart>
         </ResponsiveContainer>
       </Col>
@@ -62,7 +63,6 @@ const Cpu = (_props: Props) => {
         <Row>
           <Space className={styleModule.smallTitle}>
             <span>{cpuData.data.avgCPUsLogicUsed || 0}%</span>
-            <span>{cpuData.data.avgSpeed || 0}GHz</span>
           </Space>
         </Row>
       </Col>

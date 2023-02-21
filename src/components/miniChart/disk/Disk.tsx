@@ -1,25 +1,13 @@
 import { Col, Row, Space, Spin } from 'antd';
-import { ResponsiveContainer, Area, AreaChart } from 'recharts';
+import { ResponsiveContainer, Area, AreaChart, YAxis } from 'recharts';
 import { RootState, useAppSelector } from '../../../redux/store';
-import { useEffect, useState } from 'react';
 import styleModule from './style.module.scss';
 
 type Props = {};
 
 const Disk = (_props: Props) => {
-  const [data, setData] = useState<Array<any>>([]);
   const monitorData = useAppSelector((state: RootState) => state.monitor);
   const diskData = monitorData.find((item: any) => item.key === 'disk');
-  useEffect(() => {
-    if (diskData) {
-      console.log(diskData);
-      const dataTemp = [...data, { percent: diskData.data.avgCPUsLogicUsed }];
-      if (dataTemp.length > 10) {
-        dataTemp.pop();
-      }
-      diskData && setData(dataTemp);
-    }
-  }, [diskData]);
 
   if (!diskData) {
     return (
@@ -31,6 +19,7 @@ const Disk = (_props: Props) => {
   return (
     <>
       {diskData.data.map((disk: any, idx: number) => {
+        const data = [{ percent: disk.Percented }, { percent: disk.Percented }];
         return (
           <Row key={idx} className={styleModule.disk}>
             <Col span={9} className={styleModule.col}>
@@ -50,10 +39,11 @@ const Disk = (_props: Props) => {
                 >
                   <Area
                     type="monotone"
-                    dataKey="uv"
+                    dataKey="percent"
                     stroke="#389e0d"
                     fill="#f6ffed"
                   />
+                  <YAxis hide={true} type="number" domain={[0, 100]} />
                 </AreaChart>
               </ResponsiveContainer>
             </Col>
@@ -67,7 +57,10 @@ const Disk = (_props: Props) => {
               </Row>
               <Row>
                 <Space className={styleModule.smallTitle}>
-                  <span>SSD</span>
+                  <span>
+                    {(disk.Used / Math.pow(1024, 3)).toFixed(1)}/
+                    {(disk.Blocks / Math.pow(1024, 3)).toFixed(1)}GB
+                  </span>
                 </Space>
               </Row>
               <Row>

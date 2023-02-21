@@ -1,0 +1,34 @@
+.cpuContent {
+  width: 100%;
+  height: 100%;
+  .cpuHeader {
+    width: 100%;
+    height: 25px;
+  }
+  .cpuMain {
+    width: 100%;
+    height: calc(100% - 25px);
+    .logicalCpu {
+      width: 100%;
+      height: 80%;
+      .cpuLogicWrap {
+        padding: 5px;
+        float: left;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .cpuLogic {
+          width: 100%;
+          height: 100%;
+          border: 1px solid #0958d9;
+        }
+      }
+    }
+    .infoCpu {
+      padding: 5px;
+      width: 100%;
+      height: 20%;
+    }
+  }
+}

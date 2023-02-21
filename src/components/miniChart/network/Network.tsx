@@ -14,13 +14,12 @@ const Network = (_props: Props) => {
   );
   useEffect(() => {
     if (networkData) {
-      console.log(networkData);
       const dataTemp = [
         ...data,
         { percent: networkData.data.avgCPUsLogicUsed },
       ];
       if (dataTemp.length > 10) {
-        dataTemp.pop();
+        dataTemp.shift();
       }
       networkData && setData(dataTemp);
     }
@@ -77,14 +76,6 @@ const Network = (_props: Props) => {
               <Row>
                 <Space className={styleModule.smallTitle}>
                   <span>{ipv4.address || '0.0.0.0'}</span>
-                </Space>
-              </Row>
-              <Row>
-                <Space className={styleModule.smallTitle}>
-                  <span>S: 0</span>
-                </Space>
-                <Space className={styleModule.smallTitle}>
-                  <span>R:24.0kbps</span>
                 </Space>
               </Row>
             </Col>

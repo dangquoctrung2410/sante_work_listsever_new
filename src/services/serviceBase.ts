@@ -1,12 +1,13 @@
-import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios'
-import { getLanguage } from '../localstorage/localstorage'
+import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
+import { getLanguage } from '../localstorage/localstorage';
 
-const TIMEOUT = 1 * 60 * 100000
+const TIMEOUT = 1 * 60 * 100000;
 
 class ServiceBase {
-  service: AxiosInstance
-  onUnauthenticated: () => {}
-  constructor(baseURL: string, onUnauthenticated: () => {}) {
+  service: AxiosInstance;
+  store: any;
+  onUnauthenticated: (store: any) => {};
+  constructor(baseURL: string, onUnauthenticated: () => {}, store: any) {
     const service = axios.create({
       headers: {
         csrf: 'token',
@@ -14,24 +15,25 @@ class ServiceBase {
       },
       timeout: TIMEOUT,
       baseURL,
-    })
-    service.interceptors.request.use(this.requestSuccess)
-    service.interceptors.response.use(this.handleSuccess, this.handleError)
-    this.service = service
-    this.onUnauthenticated = onUnauthenticated
+    });
+    service.interceptors.request.use(this.requestSuccess);
+    service.interceptors.response.use(this.handleSuccess, this.handleError);
+    this.service = service;
+    this.store = store;
+    this.onUnauthenticated = onUnauthenticated;
   }
 
   requestSuccess = (config: any) => {
-    const token = localStorage.getItem('token')
-    config.headers['Accept-Language'] = getLanguage()
+    const token = localStorage.getItem('token');
+    config.headers['Accept-Language'] = getLanguage();
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`
+      config.headers.Authorization = `Bearer ${token}`;
     }
-    return config
-  }
+    return config;
+  };
 
   handleSuccess(response: AxiosResponse) {
-    return response.data
+    return response.data;
   }
 
   // logout = async () => {
@@ -48,22 +50,24 @@ class ServiceBase {
     switch (error?.response?.status) {
       case 401:
       case 403:
-        this.onUnauthenticated()
-        break
+        this.onUnauthenticated(this.store);
+        break;
 
       default:
-        break
+        break;
     }
-    return error?.response ? Promise.reject(error?.response.data) : Promise.reject(error)
-  }
+    return error?.response
+      ? Promise.reject(error?.response.data)
+      : Promise.reject(error);
+  };
 
   redirectTo = (document: any, path: string) => {
-    document.location = path
-  }
+    document.location = path;
+  };
 
   request = (config: any) => {
-    return this.service(config)
-  }
+    return this.service(config);
+  };
 }
 
-export { ServiceBase }
+export { ServiceBase };

@@ -1,16 +1,14 @@
 import { useEffect } from 'react';
-import Cpu from '../../components/miniChart/cpu/Cpu';
-import Disk from '../../components/miniChart/disk/Disk';
-import Memory from '../../components/miniChart/memory/Memory';
-import Network from '../../components/miniChart/network/Network';
+import WrapContent from '../../layout/container/content/wrap/WrapContent';
+import SiderLeft from '../../layout/container/siderLeft/SiderLeft';
 import { getPerformance } from '../../reducers/slice/monitorSlice';
 import { useAppDispatch } from '../../redux/store';
 import styleModule from './style.module.scss';
 type Props = {};
 
+let interval: NodeJS.Timeout | null | undefined = null;
 const Monitor = (_props: Props) => {
   const dispatch = useAppDispatch();
-  let interval: NodeJS.Timeout | null | undefined = null;
   useEffect(() => {
     dispatch(getPerformance());
 
@@ -24,12 +22,11 @@ const Monitor = (_props: Props) => {
     <div className={styleModule.monitor}>
       <div className={styleModule.container}>
         <div className={styleModule.siderLeft}>
-          <Cpu />
-          <Memory />
-          <Disk />
-          <Network />
+          <SiderLeft />
         </div>
-        <div className={styleModule.main}>Content</div>
+        <div className={styleModule.main}>
+          <WrapContent />
+        </div>
       </div>
     </div>
   );

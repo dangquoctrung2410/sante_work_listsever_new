@@ -1,40 +1,36 @@
-import { Button, Checkbox, Form, Input } from 'antd'
-import { useNavigate, useSearchParams } from 'react-router-dom'
-import Language from '../../components/base/language/Language'
-import Theme from '../../components/base/theme/Theme'
-import Translate from '../../components/base/translate/Translate'
-import { authenticate } from '../../reducers/slice/authSlice'
-import { useAppDispatch } from '../../redux/store'
-import styleModule from './style.module.scss'
-import path from '../../mocks/Path.json'
-import { useEffect } from 'react'
-type Props = {}
+import { Button, Checkbox, Form, Input } from 'antd';
+import { useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import Translate from '../../components/base/translate/Translate';
+import path from '../../mocks/Path.json';
+import { authenticate } from '../../reducers/slice/authSlice';
+import { useAppDispatch } from '../../redux/store';
+import styleModule from './style.module.scss';
+type Props = {};
 
 const Login = ({}: Props) => {
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
-  const [searchParams] = useSearchParams()
-  const redirectRouter = searchParams.get('return') || path.home.url
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const redirectRouter = searchParams.get('return') || path.home.url;
   const [form] = Form.useForm();
-  useEffect(()=>{
+  useEffect(() => {
     form.setFieldsValue({ username: 'admin', password: 'admin' });
-  },[])
+  }, []);
 
   const onFinish = async (values: any) => {
-    await dispatch(authenticate(values))
-    navigate(redirectRouter)
-  }
+    await dispatch(authenticate(values));
+    navigate(redirectRouter);
+  };
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo)
-  }
+    console.log('Failed:', errorInfo);
+  };
 
   return (
     <div className={styleModule.login}>
-      <Language />
-      <Theme />
       <Form
-       form={form}
+        form={form}
         name="basic"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
@@ -48,7 +44,12 @@ const Login = ({}: Props) => {
           label={<Translate contentKey="login.username" />}
           name="username"
           rules={[
-            { required: true, message: <Translate contentKey="login.requiredMessage.username" /> },
+            {
+              required: true,
+              message: (
+                <Translate contentKey="login.requiredMessage.username" />
+              ),
+            },
           ]}
         >
           <Input />
@@ -58,13 +59,22 @@ const Login = ({}: Props) => {
           label={<Translate contentKey="login.password" />}
           name="password"
           rules={[
-            { required: true, message: <Translate contentKey="login.requiredMessage.password" /> },
+            {
+              required: true,
+              message: (
+                <Translate contentKey="login.requiredMessage.password" />
+              ),
+            },
           ]}
         >
           <Input.Password />
         </Form.Item>
 
-        <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
+        <Form.Item
+          name="remember"
+          valuePropName="checked"
+          wrapperCol={{ offset: 8, span: 16 }}
+        >
           <Checkbox>{<Translate contentKey="login.remember" />}</Checkbox>
         </Form.Item>
 
@@ -75,7 +85,7 @@ const Login = ({}: Props) => {
         </Form.Item>
       </Form>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

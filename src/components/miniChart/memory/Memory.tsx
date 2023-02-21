@@ -16,12 +16,13 @@ const Memory = (_props: Props) => {
         ...data,
         {
           memory:
-            (memoryData.data.totalmem - memoryData.data.freemem) /
-            memoryData.data.totalmem,
+            ((memoryData.data.totalmem - memoryData.data.freemem) /
+              memoryData.data.totalmem) *
+            100,
         },
       ];
       if (dataTemp.length > 10) {
-        dataTemp.pop();
+        dataTemp.shift();
       }
       memoryData && setData(dataTemp);
     }
@@ -33,7 +34,6 @@ const Memory = (_props: Props) => {
       </Row>
     );
   }
-  console.log(memoryData, data);
   return (
     <Row className={styleModule.memory}>
       <Col span={9} className={styleModule.col}>
@@ -57,7 +57,7 @@ const Memory = (_props: Props) => {
               stroke="#c41d7f"
               fill="#fff0f6"
             />
-            <YAxis type="number" domain={[0, 1]} hide={true} />
+            <YAxis type="number" domain={[0, 100]} hide={true} />
           </AreaChart>
         </ResponsiveContainer>
       </Col>
