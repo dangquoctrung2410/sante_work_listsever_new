@@ -1,5 +1,5 @@
 {
-  "name": "code-base-redux-toolkit",
+  "name": "react-base",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -21,7 +21,7 @@
     "node-html-parser": "^6.1.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-i18next": "^12.1.4",
+    "react-i18next": "^12.1.5",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.8.1",
     "react-scripts": "5.0.1",

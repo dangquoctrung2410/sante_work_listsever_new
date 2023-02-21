@@ -14,9 +14,17 @@
     .largeTitle {
       font-size: 14px;
       font-weight: 500;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      overflow: hidden;
     }
     .smallTitle {
       font-size: 12px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      overflow: hidden;
     }
   }
 }

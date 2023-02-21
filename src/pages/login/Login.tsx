@@ -7,6 +7,7 @@ import { authenticate } from '../../reducers/slice/authSlice'
 import { useAppDispatch } from '../../redux/store'
 import styleModule from './style.module.scss'
 import path from '../../mocks/Path.json'
+import { useEffect } from 'react'
 type Props = {}
 
 const Login = ({}: Props) => {
@@ -14,6 +15,10 @@ const Login = ({}: Props) => {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const redirectRouter = searchParams.get('return') || path.home.url
+  const [form] = Form.useForm();
+  useEffect(()=>{
+    form.setFieldsValue({ username: 'admin', password: 'admin' });
+  },[])
 
   const onFinish = async (values: any) => {
     await dispatch(authenticate(values))
@@ -29,6 +34,7 @@ const Login = ({}: Props) => {
       <Language />
       <Theme />
       <Form
+       form={form}
         name="basic"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
