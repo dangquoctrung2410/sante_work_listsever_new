@@ -1,11 +1,18 @@
-import { Button, Checkbox, Form, Input } from 'antd';
+import {
+  AntDesignOutlined,
+  LockOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
+import { Avatar, Button, Checkbox, Form, Input, Space, Typography } from 'antd';
 import { useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import Translate from '../../components/base/translate/Translate';
 import path from '../../mocks/Path.json';
 import { authenticate } from '../../reducers/slice/authSlice';
 import { useAppDispatch } from '../../redux/store';
 import styleModule from './style.module.scss';
+
+const { Title } = Typography;
 type Props = {};
 
 const Login = ({}: Props) => {
@@ -15,7 +22,7 @@ const Login = ({}: Props) => {
   const redirectRouter = searchParams.get('return') || path.home.url;
   const [form] = Form.useForm();
   useEffect(() => {
-    form.setFieldsValue({ username: 'admin', password: 'admin' });
+    form.setFieldsValue({ email: 'string', password: 'string' });
   }, []);
 
   const onFinish = async (values: any) => {
@@ -23,67 +30,87 @@ const Login = ({}: Props) => {
     navigate(redirectRouter);
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
-
   return (
     <div className={styleModule.login}>
-      <Form
-        form={form}
-        name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        style={{ maxWidth: 600 }}
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-      >
-        <Form.Item
-          label={<Translate contentKey="login.username" />}
-          name="username"
-          rules={[
-            {
-              required: true,
-              message: (
-                <Translate contentKey="login.requiredMessage.username" />
-              ),
-            },
-          ]}
+      <Space direction="vertical" align="center">
+        <Avatar
+          size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
+          icon={<AntDesignOutlined />}
+        />
+        <Title style={{ fontSize: 22 }} level={5}>
+          <Translate contentKey="login.title" />
+        </Title>
+        <Form
+          style={{ width: 250 }}
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
         >
-          <Input />
-        </Form.Item>
+          <Form.Item
+            name="username"
+            rules={[
+              {
+                required: true,
+                message: (
+                  <Translate contentKey="login.requiredMessage.username" />
+                ),
+              },
+            ]}
+          >
+            <Input
+              prefix={<UserOutlined className="site-form-item-icon" />}
+              placeholder="Username"
+            />
+          </Form.Item>
+          <Form.Item
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: (
+                  <Translate contentKey="login.requiredMessage.password" />
+                ),
+              },
+            ]}
+          >
+            <Input
+              prefix={<LockOutlined className="site-form-item-icon" />}
+              type="password"
+              placeholder="Password"
+            />
+          </Form.Item>
+          <Form.Item>
+            <Space direction="horizontal" style={{ width: '100%' }}>
+              <Form.Item name="remember" valuePropName="checked" noStyle={true}>
+                <Checkbox>
+                  <Translate contentKey="login.remember" />
+                </Checkbox>
+              </Form.Item>
 
-        <Form.Item
-          label={<Translate contentKey="login.password" />}
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: (
-                <Translate contentKey="login.requiredMessage.password" />
-              ),
-            },
-          ]}
-        >
-          <Input.Password />
-        </Form.Item>
+              <Link to={'/register'}>
+                <Translate contentKey="login.register" />
+              </Link>
+            </Space>
+          </Form.Item>
 
-        <Form.Item
-          name="remember"
-          valuePropName="checked"
-          wrapperCol={{ offset: 8, span: 16 }}
-        >
-          <Checkbox>{<Translate contentKey="login.remember" />}</Checkbox>
-        </Form.Item>
-
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit">
-            <Translate contentKey="login.login" />
-          </Button>
-        </Form.Item>
-      </Form>
+          <Form.Item>
+            <Space direction="vertical" style={{ width: '100%' }}>
+              <Button
+                size="small"
+                type="primary"
+                htmlType="submit"
+                style={{ width: '100%' }}
+              >
+                <Translate contentKey="login.login" />
+              </Button>
+              <Link to={'/register'}>
+                <Button size="small" type="primary" style={{ width: '100%' }}>
+                  <Translate contentKey="login.register" />
+                </Button>
+              </Link>
+            </Space>
+          </Form.Item>
+        </Form>
+      </Space>
     </div>
   );
 };

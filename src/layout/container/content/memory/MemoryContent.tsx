@@ -1,6 +1,5 @@
 import { Col, Row, Skeleton, Space, theme, Typography } from 'antd';
-import { useEffect, useState } from 'react';
-import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from 'recharts';
 import Translate from '../../../../components/base/translate/Translate';
 import { RootState, useAppSelector } from '../../../../redux/store';
 import styleModule from './style.module.scss';
@@ -12,26 +11,8 @@ type Props = {};
 const MemoryContent = (_props: Props) => {
   const { token } = useToken();
 
-  const [data, setData] = useState<Array<any>>([]);
   const monitorData = useAppSelector((state: RootState) => state.monitor);
   const memoryData = monitorData.find((item: any) => item.key === 'memory');
-  useEffect(() => {
-    if (memoryData) {
-      const dataTemp = [
-        ...data,
-        {
-          memory:
-            ((memoryData.data.totalmem - memoryData.data.freemem) /
-              memoryData.data.totalmem) *
-            100,
-        },
-      ];
-      if (dataTemp.length > 10) {
-        dataTemp.shift();
-      }
-      memoryData && setData(dataTemp);
-    }
-  }, [memoryData]);
 
   if (!memoryData) {
     return <Skeleton active={true} />;
@@ -108,12 +89,13 @@ const MemoryContent = (_props: Props) => {
                   return <Cell key={`cell-${idx}`} fill={item.color} />;
                 })}
               </Pie>
+              <Legend />
             </PieChart>
           </ResponsiveContainer>
         </div>
         <div className={styleModule.infoMemory}>
           <Row>
-            <Col span={6}>
+            <Col span={8}>
               <Title level={5}>
                 <div>
                   <Translate contentKey="monitor.memory.free" />
@@ -123,7 +105,7 @@ const MemoryContent = (_props: Props) => {
                 </div>
               </Title>
             </Col>
-            <Col span={6}>
+            <Col span={8}>
               <Title level={5}>
                 <div>
                   <Translate contentKey="monitor.memory.used" />
@@ -137,7 +119,7 @@ const MemoryContent = (_props: Props) => {
                 </div>
               </Title>
             </Col>
-            <Col span={6}>
+            <Col span={8}>
               <Title level={5}>
                 <div>
                   <Translate contentKey="monitor.memory.total" />

@@ -16,10 +16,13 @@ const Theme = (_props: Props) => {
   const dispatch = useAppDispatch();
   listTheme.forEach((element: any, idx) => {
     element.key = idx;
+
     return element;
   });
   return (
     <Select
+      style={{ width: 90 }}
+      showArrow={false}
       value={theme}
       onChange={(value: any) => {
         dispatch(setThemeColor(value));

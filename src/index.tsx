@@ -1,4 +1,3 @@
-import { ConfigProvider } from 'antd';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
@@ -11,18 +10,10 @@ const root = createRoot(container);
 
 root.render(
   <ErrorBoundary>
-    <ConfigProvider
-      theme={{
-        token: {
-          colorPrimary: '#00b96b',
-        },
-      }}
-    >
-      <Provider store={store}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </Provider>
-    </ConfigProvider>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   </ErrorBoundary>,
 );

@@ -1,4 +1,4 @@
-$siderLeftWidth: 250px;
+$siderLeftWidth: 350px;
 
 .monitor {
   width: 100%;
@@ -11,6 +11,8 @@ $siderLeftWidth: 250px;
     .siderLeft {
       width: $siderLeftWidth;
       height: 100%;
+      padding: 5px;
+      margin: 5px;
     }
     .main {
       width: calc(100% - $siderLeftWidth);

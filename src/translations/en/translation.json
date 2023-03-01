@@ -23,6 +23,11 @@
       "free": "Free",
       "used": "Used",
       "total": "Total"
+    },
+    "disk": {
+      "free": "Free",
+      "used": "Used",
+      "total": "Total"
     }
   }
 }

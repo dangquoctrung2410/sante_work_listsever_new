@@ -16,7 +16,7 @@ class ServiceMonitor extends ServiceBase {
 
   // get UserInfo
   login = async (data: IPostLogin) => {
-    const url = '/authenticate/login';
+    const url = '/iam/auth/login';
     const response: IResponse<any> = await this.service.post(url, data);
     return response;
   };

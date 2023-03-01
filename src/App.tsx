@@ -5,7 +5,7 @@ import { I18nextProvider } from 'react-i18next';
 // import metadata from './release/metadata.json'
 import Router from './router/Router';
 
-import { ConfigProvider, Layout, theme, Typography } from 'antd';
+import { ConfigProvider, Layout, Space, theme, Typography } from 'antd';
 import { useEffect } from 'react';
 import Language from './components/base/language/Language';
 import LoadingTopBar from './components/base/loading/LoadingTopBar';
@@ -25,7 +25,12 @@ import { serviceConfig } from './services/serviceManager';
 import styleModule from './style.module.scss';
 const { Text } = Typography;
 const { defaultAlgorithm, darkAlgorithm } = theme;
+
+const { useToken } = theme;
+
 const App = () => {
+  const { token } = useToken();
+
   const themeData = useAppSelector(
     (state: RootState) => state.themeLanguage.theme,
   );
@@ -41,18 +46,28 @@ const App = () => {
         algorithm: themeData.dark ? darkAlgorithm : defaultAlgorithm,
         token: {
           colorPrimary: themeData.color,
-          borderRadius: 4,
+          borderRadius: 2,
+          fontSize: 13,
         },
       }}
     >
       <I18nextProvider i18n={i18n}>
-        <div className={styleModule.app}>
+        <div
+          className={styleModule.app}
+          style={{ background: token.colorBgBase }}
+        >
           <Layout className={styleModule.monitor}>
             <LoadingTopBar />
             <div className={styleModule.header}>
-              <Language />
-              <Theme />
-              <ThemeMode />
+              <Space>
+                <Language />
+              </Space>
+              <Space>
+                <Theme />
+              </Space>
+              <Space>
+                <ThemeMode />
+              </Space>
             </div>
             <div className={styleModule.container}>
               <div className={styleModule.main}>
