@@ -1,12 +1,12 @@
-import { createRoot } from 'react-dom/client'
-import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
-import App from './App'
-import ErrorBoundary from './components/base/error/ErrorBoundary'
-import { store } from './redux/store'
+import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+import ErrorBoundary from './components/base/error/ErrorBoundary';
+import { store } from './redux/store';
 
-const container = document.getElementById('root')!
-const root = createRoot(container)
+const container = document.getElementById('root')!;
+const root = createRoot(container);
 
 root.render(
   <ErrorBoundary>
@@ -15,5 +15,5 @@ root.render(
         <App />
       </BrowserRouter>
     </Provider>
-  </ErrorBoundary>
-)
+  </ErrorBoundary>,
+);

@@ -1,45 +1,50 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { AUTHORITIES } from '../../constants/constants'
-import { IPostLogin } from '../../models/login.model'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AUTHORITIES } from '../../constants/constants';
+import { IPostLogin } from '../../models/request/login.model';
 // import axios from 'axios'
-import { defaultAuth, IAuth } from '../../models/reducers/auth.model'
-import { servicesManager } from '../../services/serviceManager'
+import { defaultAuth, IAuth } from '../../models/reducers/auth.model';
+import { servicesManager } from '../../services/serviceManager';
+import { IPostRegister } from '../../models/request/register.model';
 
-const initialState: IAuth = defaultAuth
+const initialState: IAuth = defaultAuth;
 
-export const authenticate = createAsyncThunk('auth/login', async (data: IPostLogin) => {
-  const service = servicesManager.serviceMonitor
-  return service?.login(data)
-})
+export const login = createAsyncThunk(
+  'auth/login',
+  async (data: IPostLogin) => {
+    const service = servicesManager.serviceMonitor;
+    await service?.login(data);
+  },
+);
+
+export const register = createAsyncThunk(
+  'auth/register',
+  async (data: IPostRegister) => {
+    const service = servicesManager.serviceMonitor;
+    return service?.register(data);
+  },
+);
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
     setAuthentication(state, action: PayloadAction<boolean>) {
-      state.isAuthenticated = action.payload
+      state.isAuthenticated = action.payload;
     },
   },
   extraReducers(builder) {
-    builder
-      .addCase(authenticate.rejected, (state) => ({
+    builder.addCase(login.fulfilled, (state, action) => {
+      console.log(action);
+      return {
         ...state,
-        loading: true,
-      }))
-      .addCase(authenticate.fulfilled, (state, _action) => ({
-        ...state,
-        loading: false,
         isAuthenticated: true,
         account: {
           authorities: [AUTHORITIES.USER],
         },
-      }))
-      .addCase(authenticate.pending, (state) => ({
-        ...state,
-        loading: true,
-      }))
+      };
+    });
   },
-})
+});
 
-export const { setAuthentication } = authSlice.actions
-export default authSlice.reducer
+export const { setAuthentication } = authSlice.actions;
+export default authSlice.reducer;

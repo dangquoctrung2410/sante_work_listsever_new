@@ -4,7 +4,7 @@ export interface IAuth {
     authorities: Array<string>
   }
 }
-export const defaultAuth: Readonly<IAuth> = {
+export const defaultAuth: IAuth = {
   isAuthenticated: false,
   account: {
     authorities: [],

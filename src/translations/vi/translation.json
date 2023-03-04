@@ -3,6 +3,7 @@
   "403": "Xin lỗi, bạn không được phép truy cập trang này.",
   "404": "Xin lỗi, trang bạn truy cập không tồn tại.",
   "login": {
+    "title": "Đăng nhập vào youtrack",
     "login": "Đăng nhập",
     "register": "Đăng ký",
     "username": "Tài khoản",
@@ -11,6 +12,39 @@
     "requiredMessage": {
       "username": "Vui lòng nhập tên người dùng của bạn!",
       "password": "Vui lòng nhập mật khẩu của bạn!"
+    }
+  },
+  "register": {
+    "title": "Đăng ký tài khoản youtrack",
+    "register": "Đăng ký",
+    "username": "Tài khoản",
+    "password": "Mật khẩu",
+    "remember": "Ghi nhớ",
+    "iAlreadyHaveAnAccount": "Tôi đã có tài khoản",
+    "requiredMessage": {
+      "fullname": "Vui lòng nhập tên của bạn!",
+      "username": "Vui lòng nhập tên người dùng của bạn!",
+      "email": "Vui lòng nhập email của bạn!",
+      "password": "Vui lòng nhập mật khẩu của bạn!",
+      "repassword": "Vui lòng nhập lại mật khẩu của bạn!",
+      "isNotEmail": "Định dạng nhập vào không phải là email"
+    }
+  },
+  "monitor": {
+    "cpu": {
+      "utilisation": "Tình trạng sử dụng",
+      "speed": "Tốc độ",
+      "upTime": "Thời gian hoạt động"
+    },
+    "memory": {
+      "free": "Trống",
+      "used": "Đã dùng",
+      "total": "Tổng"
+    },
+    "disk": {
+      "free": "Trống",
+      "used": "Đã dùng",
+      "total": "Tổng"
     }
   }
 }

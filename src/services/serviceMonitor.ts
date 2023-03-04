@@ -1,32 +1,44 @@
-import { IPostLogin } from '../models/login.model'
-import { IResponse } from '../models/response.model'
-import { ServiceBase } from './serviceBase'
+import { IPostLogin } from '../models/request/login.model';
+import { IPostRegister } from '../models/request/register.model';
+import { IResponse } from '../models/response/response.model';
+import { ServiceBase } from './serviceBase';
 
 class ServiceMonitor extends ServiceBase {
-  constructor(baseURL: string, onUnauthenticated: () => {}) {
-    super(baseURL, onUnauthenticated)
+  constructor(baseURL: string, onUnauthenticated: () => {}, store: any) {
+    super(baseURL, onUnauthenticated, store);
   }
 
   // get UserInfo
   getMonitor = async () => {
-    const url = '/api/monitor'
-    const response: IResponse<any> = await this.service.get(url)
-    if (response.status !== 1) {
-      return
-    }
-    return response.data
-  }
+    const url = '/monitor/performance';
+    const response: IResponse<any> = await this.service.get(url);
+    return response.data;
+  };
 
   // get UserInfo
   login = async (data: IPostLogin) => {
-    const url = '/authenticate/login'
-    const response: IResponse<any> = await this.service.post(url, data)
-    console.log(response)
-    if (response.status !== 1) {
-      throw new Error(response.message)
-    }
-    return response
-  }
+    const url = '/iam/auth/login';
+    const response: IResponse<any> = await this.service.post(url, data);
+    return response;
+  };
+
+  register = async (data: IPostRegister) => {
+    const url = '/iam/auth/register';
+    const response: IResponse<any> = await this.service.post(url, data);
+    return response;
+  };
+
+  getPolicies = async () => {
+    const url = '/iam/users/policies';
+    const response: IResponse<any> = await this.service.get(url);
+    return response;
+  };
+
+  getAllUser = async () => {
+    const url = '/iam/users';
+    const response: IResponse<any> = await this.service.get(url);
+    return response;
+  };
 }
 
-export { ServiceMonitor }
+export { ServiceMonitor };

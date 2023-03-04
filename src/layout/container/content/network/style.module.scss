@@ -1,0 +1,18 @@
+.memoryContent {
+  width: 100%;
+  height: 100%;
+  .memoryHeader {
+    width: 100%;
+    height: 25px;
+  }
+  .memoryMain {
+    width: 100%;
+    height: calc(100% - 25px);
+    .logicalMemory {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      height: 80%;
+    }
+  }
+}

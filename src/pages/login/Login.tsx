@@ -1,75 +1,121 @@
-import { Button, Checkbox, Form, Input } from 'antd'
-import { useNavigate, useSearchParams } from 'react-router-dom'
-import Language from '../../components/base/language/Language'
-import Theme from '../../components/base/theme/Theme'
-import Translate from '../../components/base/translate/Translate'
-import { authenticate } from '../../reducers/slice/authSlice'
-import { useAppDispatch } from '../../redux/store'
-import styleModule from './style.module.scss'
-import path from '../../mocks/Path.json'
-type Props = {}
+import {
+  AntDesignOutlined,
+  LockOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
+import { isRejected } from '@reduxjs/toolkit';
+import { Avatar, Button, Checkbox, Form, Input, Space, Typography } from 'antd';
+import { useEffect } from 'react';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import Translate from '../../components/base/translate/Translate';
+import path from '../../mocks/Path.json';
+import { login } from '../../reducers/slice/authSlice';
+import { useAppDispatch } from '../../redux/store';
+import styleModule from './style.module.scss';
+
+const { Title } = Typography;
+type Props = {};
 
 const Login = ({}: Props) => {
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
-  const [searchParams] = useSearchParams()
-  const redirectRouter = searchParams.get('return') || path.home.url
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const redirectRouter = searchParams.get('return') || path.home.url;
+  const [form] = Form.useForm();
+  useEffect(() => {
+    form.setFieldsValue({ email: 'string', password: 'string' });
+  }, []);
 
   const onFinish = async (values: any) => {
-    await dispatch(authenticate(values))
-    navigate(redirectRouter)
-  }
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo)
-  }
+    const result = await dispatch(login(values));
+    if (!isRejected(result)) {
+      navigate(redirectRouter);
+    }
+  };
 
   return (
     <div className={styleModule.login}>
-      <Language />
-      <Theme />
-      <Form
-        name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        style={{ maxWidth: 600 }}
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-      >
-        <Form.Item
-          label={<Translate contentKey="login.username" />}
-          name="username"
-          rules={[
-            { required: true, message: <Translate contentKey="login.requiredMessage.username" /> },
-          ]}
+      <Space direction="vertical" align="center">
+        <Avatar
+          size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
+          icon={<AntDesignOutlined />}
+        />
+        <Title style={{ fontSize: 22 }} level={5}>
+          <Translate contentKey="login.title" />
+        </Title>
+        <Form
+          style={{ width: 250 }}
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
         >
-          <Input />
-        </Form.Item>
+          <Form.Item
+            name="username"
+            rules={[
+              {
+                required: true,
+                message: (
+                  <Translate contentKey="login.requiredMessage.username" />
+                ),
+              },
+            ]}
+          >
+            <Input
+              prefix={<UserOutlined className="site-form-item-icon" />}
+              placeholder="Username"
+            />
+          </Form.Item>
+          <Form.Item
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: (
+                  <Translate contentKey="login.requiredMessage.password" />
+                ),
+              },
+            ]}
+          >
+            <Input
+              prefix={<LockOutlined className="site-form-item-icon" />}
+              type="password"
+              placeholder="Password"
+            />
+          </Form.Item>
+          <Form.Item>
+            <Space direction="horizontal" style={{ width: '100%' }}>
+              <Form.Item name="remember" valuePropName="checked" noStyle={true}>
+                <Checkbox>
+                  <Translate contentKey="login.remember" />
+                </Checkbox>
+              </Form.Item>
 
-        <Form.Item
-          label={<Translate contentKey="login.password" />}
-          name="password"
-          rules={[
-            { required: true, message: <Translate contentKey="login.requiredMessage.password" /> },
-          ]}
-        >
-          <Input.Password />
-        </Form.Item>
+              <Link to={'/register'}>
+                <Translate contentKey="login.register" />
+              </Link>
+            </Space>
+          </Form.Item>
 
-        <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
-          <Checkbox>{<Translate contentKey="login.remember" />}</Checkbox>
-        </Form.Item>
-
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit">
-            <Translate contentKey="login.login" />
-          </Button>
-        </Form.Item>
-      </Form>
+          <Form.Item>
+            <Space direction="vertical" style={{ width: '100%' }}>
+              <Button
+                size="small"
+                type="primary"
+                htmlType="submit"
+                style={{ width: '100%' }}
+              >
+                <Translate contentKey="login.login" />
+              </Button>
+              <Link to={'/register'}>
+                <Button size="small" type="primary" style={{ width: '100%' }}>
+                  <Translate contentKey="login.register" />
+                </Button>
+              </Link>
+            </Space>
+          </Form.Item>
+        </Form>
+      </Space>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

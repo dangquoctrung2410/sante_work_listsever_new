@@ -1,24 +1,35 @@
-import { setTheme } from '../../../reducers/slice/themeLanguageSlice'
-import { RootState, useAppDispatch, useAppSelector } from '../../../redux/store'
+import { Select } from 'antd';
+import { setThemeColor } from '../../../reducers/slice/themeLanguageSlice';
+import {
+  RootState,
+  useAppDispatch,
+  useAppSelector,
+} from '../../../redux/store';
+import listTheme from '../../../mocks/Themes.json';
 
-type Props = {}
+type Props = {};
 
 const Theme = (_props: Props) => {
-  const theme = useAppSelector((state: RootState) => state.themeLanguage.theme)
-  const dispatch = useAppDispatch()
-  return (
-    <select
-      value={theme}
-      onChange={(e: any) => {
-        dispatch(setTheme(e.target.value))
-      }}
-    >
-      <option value="default">Default Theme</option>
-      <option value="red">Red Theme</option>
-      <option value="purple">Purple Theme</option>
-      <option value="pink">Pink theme</option>
-    </select>
-  )
-}
+  const theme = useAppSelector(
+    (state: RootState) => state.themeLanguage.theme.color,
+  );
+  const dispatch = useAppDispatch();
+  listTheme.forEach((element: any, idx) => {
+    element.key = idx;
 
-export default Theme
+    return element;
+  });
+  return (
+    <Select
+      style={{ width: 90 }}
+      showArrow={false}
+      value={theme}
+      onChange={(value: any) => {
+        dispatch(setThemeColor(value));
+      }}
+      options={listTheme}
+    />
+  );
+};
+
+export default Theme;

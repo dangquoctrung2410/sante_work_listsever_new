@@ -1,0 +1,22 @@
+$siderLeftWidth: 350px;
+
+.monitor {
+  width: 100%;
+  height: 100%;
+
+  .container {
+    display: flex;
+    height: calc(100%);
+
+    .siderLeft {
+      width: $siderLeftWidth;
+      height: 100%;
+      padding: 5px;
+      margin: 5px;
+    }
+    .main {
+      width: calc(100% - $siderLeftWidth);
+      height: 100%;
+    }
+  }
+}
