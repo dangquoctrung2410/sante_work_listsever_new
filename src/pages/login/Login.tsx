@@ -3,12 +3,13 @@ import {
   LockOutlined,
   UserOutlined,
 } from '@ant-design/icons';
+import { isRejected } from '@reduxjs/toolkit';
 import { Avatar, Button, Checkbox, Form, Input, Space, Typography } from 'antd';
 import { useEffect } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import Translate from '../../components/base/translate/Translate';
 import path from '../../mocks/Path.json';
-import { authenticate } from '../../reducers/slice/authSlice';
+import { login } from '../../reducers/slice/authSlice';
 import { useAppDispatch } from '../../redux/store';
 import styleModule from './style.module.scss';
 
@@ -26,8 +27,10 @@ const Login = ({}: Props) => {
   }, []);
 
   const onFinish = async (values: any) => {
-    await dispatch(authenticate(values));
-    navigate(redirectRouter);
+    const result = await dispatch(login(values));
+    if (!isRejected(result)) {
+      navigate(redirectRouter);
+    }
   };
 
   return (

@@ -1,9 +1,11 @@
 import { AntDesignOutlined } from '@ant-design/icons';
+import { isRejected } from '@reduxjs/toolkit';
 import { Avatar, Button, Checkbox, Form, Input, Space, Typography } from 'antd';
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Translate from '../../components/base/translate/Translate';
 import path from '../../mocks/Path.json';
+import { register } from '../../reducers/slice/authSlice';
+import { useAppDispatch } from '../../redux/store';
 import styleModule from './style.module.scss';
 
 const { Title } = Typography;
@@ -11,15 +13,18 @@ const { Title } = Typography;
 type Props = {};
 
 const Register = (_props: Props) => {
-  const [form] = Form.useForm();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const redirectRouter = path.home.url;
+  const redirectRouter = path.login.url;
 
-  useEffect(() => {
-    form.setFieldsValue({ email: 'string', password: 'string' });
-  }, []);
+  const onFinish = async (values: any) => {
+    const result = await dispatch(register(values));
+    if (!isRejected(result)) {
+      navigate(redirectRouter);
+    }
+  };
 
-  const onFinish = async () => {
+  const backToLogin = () => {
     navigate(redirectRouter);
   };
 
@@ -66,7 +71,21 @@ const Register = (_props: Props) => {
             <Input placeholder="Username" />
           </Form.Item>
 
-          <Form.Item name="email">
+          <Form.Item
+            name="email"
+            rules={[
+              {
+                required: true,
+                message: (
+                  <Translate contentKey="register.requiredMessage.email" />
+                ),
+              },
+              {
+                type: 'email',
+                message: 'register.requiredMessage.isNotEmail',
+              },
+            ]}
+          >
             <Input placeholder="Email" />
           </Form.Item>
 
@@ -85,17 +104,17 @@ const Register = (_props: Props) => {
           </Form.Item>
 
           <Form.Item
-            name="password"
+            name="repassword"
             rules={[
               {
                 required: true,
                 message: (
-                  <Translate contentKey="register.requiredMessage.password" />
+                  <Translate contentKey="register.requiredMessage.repassword" />
                 ),
               },
             ]}
           >
-            <Input type="passwordConfirm" placeholder="Password confirm" />
+            <Input type="password" placeholder="Password confirm" />
           </Form.Item>
           <Form.Item name="remember" valuePropName="checked" noStyle={true}>
             <Checkbox>
@@ -104,14 +123,24 @@ const Register = (_props: Props) => {
           </Form.Item>
 
           <Form.Item>
-            <Button
-              size="small"
-              type="primary"
-              htmlType="submit"
-              style={{ width: '100%' }}
-            >
-              <Translate contentKey="register.register" />
-            </Button>
+            <Space direction="vertical" style={{ width: '100%' }}>
+              <Button
+                size="small"
+                type="primary"
+                htmlType="submit"
+                style={{ width: '100%' }}
+              >
+                <Translate contentKey="register.register" />
+              </Button>
+              <Button
+                onClick={backToLogin}
+                size="small"
+                type="link"
+                style={{ width: '100%' }}
+              >
+                <Translate contentKey="register.iAlreadyHaveAnAccount" />
+              </Button>
+            </Space>
           </Form.Item>
         </Form>
       </Space>

@@ -20,10 +20,14 @@
     "username": "Tài khoản",
     "password": "Mật khẩu",
     "remember": "Ghi nhớ",
+    "iAlreadyHaveAnAccount": "Tôi đã có tài khoản",
     "requiredMessage": {
       "fullname": "Vui lòng nhập tên của bạn!",
       "username": "Vui lòng nhập tên người dùng của bạn!",
-      "password": "Vui lòng nhập mật khẩu của bạn!"
+      "email": "Vui lòng nhập email của bạn!",
+      "password": "Vui lòng nhập mật khẩu của bạn!",
+      "repassword": "Vui lòng nhập lại mật khẩu của bạn!",
+      "isNotEmail": "Định dạng nhập vào không phải là email"
     }
   },
   "monitor": {
