@@ -1,6 +1,9 @@
 import { Button, Layout, Space } from 'antd';
+import { Group } from 'antd/es/avatar';
 import { Link, Route } from 'react-router-dom';
 import { ErrorBoundaryRoutes } from '../../components/base/error/ErrorBoundaryRoutes';
+import Organization from '../../layout/administrator/organization/Organization';
+import Role from '../../layout/administrator/role/Role';
 import User from '../../layout/administrator/user/User';
 import Monitor from '../monitor/Monitor';
 const { Header, Content } = Layout;
@@ -31,9 +34,9 @@ const Administrator = (_props: Props) => {
       <Content>
         <ErrorBoundaryRoutes>
           <Route index={true} path="user" element={<User />} />
-          <Route path="role" element={'role'} />
-          <Route path="group" element={'group'} />
-          <Route path="organization" element={'organization'} />
+          <Route path="role" element={<Role />} />
+          <Route path="group" element={<Group />} />
+          <Route path="organization" element={<Organization />} />
           <Route path="monitor" element={<Monitor />} />
         </ErrorBoundaryRoutes>
       </Content>

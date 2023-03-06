@@ -5,7 +5,6 @@ import {
 } from '@ant-design/icons';
 import { isRejected } from '@reduxjs/toolkit';
 import { Avatar, Button, Checkbox, Form, Input, Space, Typography } from 'antd';
-import { useEffect } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import Translate from '../../components/base/translate/Translate';
 import path from '../../mocks/Path.json';
@@ -21,10 +20,6 @@ const Login = ({}: Props) => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const redirectRouter = searchParams.get('return') || path.home.url;
-  const [form] = Form.useForm();
-  useEffect(() => {
-    form.setFieldsValue({ email: 'string', password: 'string' });
-  }, []);
 
   const onFinish = async (values: any) => {
     const result = await dispatch(login(values));
@@ -45,7 +40,11 @@ const Login = ({}: Props) => {
         </Title>
         <Form
           style={{ width: 250 }}
-          initialValues={{ remember: true }}
+          initialValues={{
+            remember: true,
+            username: 'string',
+            password: 'string',
+          }}
           onFinish={onFinish}
         >
           <Form.Item
@@ -59,10 +58,7 @@ const Login = ({}: Props) => {
               },
             ]}
           >
-            <Input
-              prefix={<UserOutlined className="site-form-item-icon" />}
-              placeholder="Username"
-            />
+            <Input prefix={<UserOutlined />} placeholder="Username" />
           </Form.Item>
           <Form.Item
             name="password"
@@ -76,7 +72,7 @@ const Login = ({}: Props) => {
             ]}
           >
             <Input
-              prefix={<LockOutlined className="site-form-item-icon" />}
+              prefix={<LockOutlined />}
               type="password"
               placeholder="Password"
             />

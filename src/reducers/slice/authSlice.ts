@@ -5,6 +5,7 @@ import { IPostLogin } from '../../models/request/login.model';
 import { defaultAuth, IAuth } from '../../models/reducers/auth.model';
 import { servicesManager } from '../../services/serviceManager';
 import { IPostRegister } from '../../models/request/register.model';
+import { saveToken } from '../../localstorage/localstorage';
 
 const initialState: IAuth = defaultAuth;
 
@@ -12,7 +13,7 @@ export const login = createAsyncThunk(
   'auth/login',
   async (data: IPostLogin) => {
     const service = servicesManager.serviceMonitor;
-    await service?.login(data);
+    return service?.login(data);
   },
 );
 
@@ -35,6 +36,7 @@ const authSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(login.fulfilled, (state, action) => {
       console.log(action);
+      saveToken(action.payload.access_token);
       return {
         ...state,
         isAuthenticated: true,

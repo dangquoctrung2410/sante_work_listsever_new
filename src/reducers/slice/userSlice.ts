@@ -1,37 +1,34 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AUTHORITIES } from '../../constants/constants';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 // import axios from 'axios'
-import { defaultAuth, IAuth } from '../../models/reducers/auth.model';
+import {
+  defaultListUser,
+  IListUserReducer,
+} from '../../models/reducers/user.model';
 import { servicesManager } from '../../services/serviceManager';
 
-const initialState: IAuth = defaultAuth;
+const initialState: IListUserReducer = defaultListUser;
 
 export const getAllUser = createAsyncThunk('user/allUser', async () => {
   const service = servicesManager.serviceMonitor;
-  await service?.getAllUser();
+  return await service?.getAllUser();
 });
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {
-    setAuthentication(state, action: PayloadAction<boolean>) {
-      state.isAuthenticated = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers(builder) {
     builder.addCase(getAllUser.fulfilled, (state, action) => {
       console.log(action);
+      action.payload.data.forEach((element: any, idx: any) => {
+        element.key = idx;
+      });
       return {
         ...state,
-        isAuthenticated: true,
-        account: {
-          authorities: [AUTHORITIES.USER],
-        },
+        listUser: action.payload.data,
       };
     });
   },
 });
 
-export const { setAuthentication } = userSlice.actions;
 export default userSlice.reducer;

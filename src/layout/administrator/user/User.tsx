@@ -1,5 +1,12 @@
 import { ColumnsType } from 'antd/es/table';
 import { Table } from 'antd';
+import {
+  RootState,
+  useAppDispatch,
+  useAppSelector,
+} from '../../../redux/store';
+import { getAllUser } from '../../../reducers/slice/userSlice';
+import { useEffect } from 'react';
 type Props = {};
 
 interface IDataType {
@@ -7,9 +14,16 @@ interface IDataType {
   fullname: string;
   username: string;
   email: string;
-  registrationDate: string;
+  createdAt: string;
 }
 const User = (_props: Props) => {
+  const dispatch = useAppDispatch();
+  const listUser = useAppSelector((state: RootState) => state.user.listUser);
+  console.log(listUser);
+
+  useEffect(() => {
+    dispatch(getAllUser());
+  }, []);
   const columns: ColumnsType<IDataType> = [
     {
       title: 'Fullname',
@@ -35,20 +49,9 @@ const User = (_props: Props) => {
       sorter: true,
       ellipsis: true,
       title: 'Registration date',
-      dataIndex: 'registrationDate',
+      dataIndex: 'createdAt',
     },
   ];
-
-  const data: Array<IDataType> = [];
-  for (let i = 0; i < 46; i++) {
-    data.push({
-      key: i,
-      fullname: `Edward King ${i}`,
-      username: `Edward King ${i}`,
-      email: `Edward King ${i}`,
-      registrationDate: `London, Park Lane no. ${i}`,
-    });
-  }
 
   const rowSelection = {
     selectedRowKeys: [],
@@ -60,7 +63,7 @@ const User = (_props: Props) => {
       size="small"
       rowSelection={rowSelection}
       columns={columns}
-      dataSource={data}
+      dataSource={listUser}
     />
   );
 };
