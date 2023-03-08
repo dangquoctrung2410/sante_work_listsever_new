@@ -42,8 +42,8 @@ const Login = ({}: Props) => {
           style={{ width: 250 }}
           initialValues={{
             remember: true,
-            username: 'string',
-            password: 'string',
+            username: 'admin',
+            password: 'admin',
           }}
           onFinish={onFinish}
         >

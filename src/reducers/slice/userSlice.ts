@@ -13,13 +13,20 @@ export const getAllUser = createAsyncThunk('user/allUser', async () => {
   return await service?.getAllUser();
 });
 
+export const getGroupOfUser = createAsyncThunk(
+  'user/getGroupOfUser',
+  async (userId: string) => {
+    const service = servicesManager.serviceMonitor;
+    return await service?.getGroupOfUser(userId);
+  },
+);
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {},
   extraReducers(builder) {
     builder.addCase(getAllUser.fulfilled, (state, action) => {
-      console.log(action);
       action.payload.data.forEach((element: any, idx: any) => {
         element.key = idx;
       });

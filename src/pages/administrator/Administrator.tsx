@@ -1,17 +1,20 @@
 import { Button, Layout, Space } from 'antd';
-import { Group } from 'antd/es/avatar';
 import { Link, Route } from 'react-router-dom';
 import { ErrorBoundaryRoutes } from '../../components/base/error/ErrorBoundaryRoutes';
+import Group from '../../layout/administrator/group/Group';
 import Organization from '../../layout/administrator/organization/Organization';
+import Project from '../../layout/administrator/project/Project';
 import Role from '../../layout/administrator/role/Role';
-import User from '../../layout/administrator/user/User';
+import UserRouter from '../../layout/administrator/user/Router';
 import Monitor from '../monitor/Monitor';
 const { Header, Content } = Layout;
 type Props = {};
 
 const Administrator = (_props: Props) => {
   return (
-    <Layout style={{ height: '100%', width: '100%' }}>
+    <Layout
+      style={{ height: '100%', width: '100%', background: 'transparent' }}
+    >
       <Header>
         <Space>
           <Link to={`user`}>
@@ -26,6 +29,9 @@ const Administrator = (_props: Props) => {
           <Link to={`organization`}>
             <Button type="link">Organization</Button>
           </Link>
+          <Link to={`project`}>
+            <Button type="link">Project</Button>
+          </Link>
           <Link to={`monitor`}>
             <Button type="link">Monitor</Button>
           </Link>
@@ -33,10 +39,11 @@ const Administrator = (_props: Props) => {
       </Header>
       <Content>
         <ErrorBoundaryRoutes>
-          <Route index={true} path="user" element={<User />} />
+          <Route index={true} path="user/*" element={<UserRouter />} />
           <Route path="role" element={<Role />} />
           <Route path="group" element={<Group />} />
           <Route path="organization" element={<Organization />} />
+          <Route path="project" element={<Project />} />
           <Route path="monitor" element={<Monitor />} />
         </ErrorBoundaryRoutes>
       </Content>
