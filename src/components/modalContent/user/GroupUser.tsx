@@ -1,25 +1,39 @@
-import { DownOutlined, GroupOutlined } from '@ant-design/icons';
-import { Button, Dropdown, Space, Table } from 'antd';
+import { GroupOutlined } from '@ant-design/icons';
+import { Button, Select, Space, Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { getAllGroup } from '../../../reducers/slice/groupSlice';
+import {
+  getGroupOfUser,
+  userJoinToGroup,
+} from '../../../reducers/slice/userSlice';
 import {
   RootState,
   useAppDispatch,
   useAppSelector,
 } from '../../../redux/store';
-import { getGroupOfUser } from '../../../reducers/slice/userSlice';
 
 type Props = {};
+let values: string[] = [];
 
 const GroupUser = (_props: Props) => {
   const dispatch = useAppDispatch();
   const { id } = useParams<'id'>();
-  const listGroup = useAppSelector((state: RootState) => state.group.listUser);
-  useEffect(() => {
-    id && dispatch(getGroupOfUser(id));
-  }, []);
+  const [groupOfUser, setGroupOfUser] = useState([]);
 
+  const listGroup = useAppSelector((state: RootState) => state.group.listGroup);
+  const getListGroupOfUser = async () => {
+    if (id) {
+      const listGroupOfUser = await dispatch(getGroupOfUser(id));
+      setGroupOfUser(listGroupOfUser.payload);
+    }
+  };
+  useEffect(() => {
+    getListGroupOfUser();
+    dispatch(getAllGroup());
+  }, []);
+  console.log(groupOfUser);
   const columns: ColumnsType<any> = [
     {
       title: 'Name',
@@ -52,26 +66,46 @@ const GroupUser = (_props: Props) => {
   };
 
   return (
-    <>
-      <Dropdown
-        trigger={['click']}
-        dropdownRender={() => {
-          return 'dsadasdasdasd';
-        }}
-        placement="bottomLeft"
-        arrow={true}
-      >
-        <Button icon={<DownOutlined />} type="primary">
-          Add Group
+    <Space direction="vertical">
+      <Space>
+        <Select
+          onChange={(value) => {
+            console.log(value);
+            values = value;
+          }}
+          showArrow={true}
+          showSearch={true}
+          mode="multiple"
+          placeholder="Add to group"
+          style={{ width: 120 }}
+          filterOption={(input, option) =>
+            ((option?.label ?? '') as any).includes(input)
+          }
+          options={listGroup.map((item: any) => ({
+            value: item.id,
+            label: item.name,
+          }))}
+        />
+        <Button
+          type="primary"
+          onClick={async () => {
+            if (id) {
+              await dispatch(userJoinToGroup({ userId: id, groupIds: values }));
+              getListGroupOfUser();
+            }
+          }}
+        >
+          Add
         </Button>
-      </Dropdown>
+      </Space>
+
       <Table
         size="small"
         rowSelection={rowSelection}
         columns={columns}
-        dataSource={listGroup}
+        dataSource={groupOfUser}
       />
-    </>
+    </Space>
   );
 };
 

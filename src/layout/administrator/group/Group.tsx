@@ -24,7 +24,7 @@ interface IDataType {
 
 const Group = (_props: Props) => {
   const dispatch = useAppDispatch();
-  const listGroup = useAppSelector((state: RootState) => state.group.listUser);
+  const listGroup = useAppSelector((state: RootState) => state.group.listGroup);
   useEffect(() => {
     dispatch(getAllGroup());
   }, []);

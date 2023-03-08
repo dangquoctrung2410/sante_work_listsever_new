@@ -1,7 +1,7 @@
 import { Button, Layout, Space } from 'antd';
 import { Link, Route } from 'react-router-dom';
 import { ErrorBoundaryRoutes } from '../../components/base/error/ErrorBoundaryRoutes';
-import Group from '../../layout/administrator/group/Group';
+import GroupRouter from '../../layout/administrator/group/Router';
 import Organization from '../../layout/administrator/organization/Organization';
 import Project from '../../layout/administrator/project/Project';
 import Role from '../../layout/administrator/role/Role';
@@ -41,7 +41,7 @@ const Administrator = (_props: Props) => {
         <ErrorBoundaryRoutes>
           <Route index={true} path="user/*" element={<UserRouter />} />
           <Route path="role" element={<Role />} />
-          <Route path="group" element={<Group />} />
+          <Route path="group/*" element={<GroupRouter />} />
           <Route path="organization" element={<Organization />} />
           <Route path="project" element={<Project />} />
           <Route path="monitor" element={<Monitor />} />

@@ -14,6 +14,14 @@ export const getAllGroup = createAsyncThunk('group/allGroup', async () => {
   return await service?.getAllGroup();
 });
 
+export const getMemberOfGroup = createAsyncThunk(
+  'group/getMemberOfGroup',
+  async (groupId: string) => {
+    const service = servicesManager.serviceMonitor;
+    return await service?.getMemberOfGroup(groupId);
+  },
+);
+
 export const createGroup = createAsyncThunk(
   'group/createGroup',
   async (data: ICreateGroup) => {
@@ -33,7 +41,7 @@ const groupSlice = createSlice({
       });
       return {
         ...state,
-        listUser: action.payload.data,
+        listGroup: action.payload.data,
       };
     });
   },

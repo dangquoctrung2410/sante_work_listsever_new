@@ -9,7 +9,7 @@ const UserRouter = (_props: Props) => {
   return (
     <ErrorBoundaryRoutes>
       <Route index={true} element={<User />} />
-      <Route index={true} path=":id" element={<DetailUser />} />
+      <Route path=":id" element={<DetailUser />} />
     </ErrorBoundaryRoutes>
   );
 };

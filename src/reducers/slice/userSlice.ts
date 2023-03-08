@@ -21,6 +21,14 @@ export const getGroupOfUser = createAsyncThunk(
   },
 );
 
+export const userJoinToGroup = createAsyncThunk(
+  'user/userJoinToGroup',
+  async (data: { userId: string; groupIds: Array<string> }) => {
+    const service = servicesManager.serviceMonitor;
+    return await service?.userJoinToGroup(data.userId, data.groupIds);
+  },
+);
+
 const userSlice = createSlice({
   name: 'user',
   initialState,

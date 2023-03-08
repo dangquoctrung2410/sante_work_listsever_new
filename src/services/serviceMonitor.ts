@@ -47,9 +47,23 @@ class ServiceMonitor extends ServiceBase {
     return response.data;
   };
 
+  getMemberOfGroup = async (groupId: string) => {
+    const url = `/iam/groups/${groupId}/getMembers`;
+    const response: IResponse<any> = await this.service.get(url);
+    return response.data;
+  };
+
   getGroupOfUser = async (userId: string) => {
     const url = `/iam/users/${userId}/group`;
     const response: IResponse<any> = await this.service.get(url);
+    return response.data;
+  };
+
+  userJoinToGroup = async (userId: string, groupIds: Array<string>) => {
+    const url = `/iam/users/${userId}/joinGroup`;
+    const response: IResponse<any> = await this.service.post(url, {
+      groups: groupIds,
+    });
     return response.data;
   };
 
