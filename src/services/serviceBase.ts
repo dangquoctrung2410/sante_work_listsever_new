@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
-import { getLanguage } from '../localstorage/localstorage';
+import { getLanguage, getToken } from '../localstorage/localstorage';
 
 const TIMEOUT = 1 * 60 * 100000;
 
@@ -24,7 +24,7 @@ class ServiceBase {
   }
 
   requestSuccess = (config: any) => {
-    const token = localStorage.getItem('token');
+    const token = getToken();
     config.headers['Accept-Language'] = getLanguage();
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;

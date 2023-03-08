@@ -1,41 +1,58 @@
-import { defaultThemeLanguage } from '../models/reducers/themeLanguage.model'
+import { defaultThemeLanguage } from '../models/reducers/themeLanguage.model';
 
+const saveToken = (data: string, key = 'token') => {
+  localStorage.setItem(key, data);
+};
+
+const getToken = (key = 'token') => {
+  const token = localStorage.getItem(key);
+  return token;
+};
 const saveTheme = (name: string, key = 'theme') => {
-  localStorage.setItem(key, name)
-}
+  localStorage.setItem(key, name);
+};
 
 const getTheme = (key = 'theme') => {
-  const theme = localStorage.getItem(key)
+  const theme = localStorage.getItem(key);
   if (theme) {
-    return theme
+    return theme;
   } else {
-    return defaultThemeLanguage.theme
+    return defaultThemeLanguage.theme;
   }
-}
+};
 
 const saveLanguage = (name: string, key = 'lng') => {
-  localStorage.setItem(key, name)
-}
+  localStorage.setItem(key, name);
+};
 
 const getLanguage = (key = 'lng') => {
-  const lng = localStorage.getItem(key)
+  const lng = localStorage.getItem(key);
   if (lng) {
-    return lng
+    return lng;
   } else {
-    return defaultThemeLanguage.language
+    return defaultThemeLanguage.language;
   }
-}
+};
 
 const getAboutProduct = (key = 'aboutProduct') => {
-  const aboutProduct = localStorage.getItem(key)
+  const aboutProduct = localStorage.getItem(key);
   if (!aboutProduct) {
-    return
+    return;
   }
-  return JSON.parse(aboutProduct)
-}
+  return JSON.parse(aboutProduct);
+};
 
 const setAboutProduct = (aboutProduct: any, key = 'aboutProduct') => {
-  localStorage.setItem(key, aboutProduct)
-}
+  localStorage.setItem(key, aboutProduct);
+};
 
-export { saveLanguage, getLanguage, getAboutProduct, setAboutProduct, saveTheme, getTheme }
+export {
+  saveLanguage,
+  getLanguage,
+  getAboutProduct,
+  setAboutProduct,
+  saveTheme,
+  getTheme,
+  saveToken,
+  getToken,
+};

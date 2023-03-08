@@ -1,15 +1,35 @@
+import { Space, Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
-import { Table } from 'antd';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import CreateUser from '../../../components/modalContent/user/CreateUser';
+import { getAllUser } from '../../../reducers/slice/userSlice';
+import {
+  RootState,
+  useAppDispatch,
+  useAppSelector,
+} from '../../../redux/store';
+
 type Props = {};
 
 interface IDataType {
   key: React.Key;
+  id: string;
   fullname: string;
   username: string;
   email: string;
-  registrationDate: string;
+  groups: any;
+  createdAt: string;
 }
 const User = (_props: Props) => {
+  const dispatch = useAppDispatch();
+  const listUser = useAppSelector((state: RootState) => state.user.listUser);
+  console.log(listUser);
+
+  useEffect(() => {
+    dispatch(getAllUser());
+  }, []);
+
   const columns: ColumnsType<IDataType> = [
     {
       title: 'Fullname',
@@ -17,6 +37,16 @@ const User = (_props: Props) => {
       sorter: true,
       sortOrder: 'descend',
       ellipsis: true,
+      render: (_value, record, _index) => {
+        console.log(record);
+        return (
+          <Link to={record.id}>
+            <Space align="center" direction="horizontal">
+              {record.fullname}
+            </Space>
+          </Link>
+        );
+      },
     },
     {
       sorter: true,
@@ -35,20 +65,27 @@ const User = (_props: Props) => {
       sorter: true,
       ellipsis: true,
       title: 'Registration date',
-      dataIndex: 'registrationDate',
+      dataIndex: 'createdAt',
+    },
+    {
+      sorter: true,
+      ellipsis: true,
+      title: 'Membership',
+      dataIndex: 'group',
+      render: (_value, record, _index) => {
+        return record.groups.map((group: any, idx: number) => {
+          return (
+            <>
+              <Space align="center" direction="horizontal" key={idx}>
+                <Link to={group.id}>{group.name}</Link>
+              </Space>
+              ,
+            </>
+          );
+        });
+      },
     },
   ];
-
-  const data: Array<IDataType> = [];
-  for (let i = 0; i < 46; i++) {
-    data.push({
-      key: i,
-      fullname: `Edward King ${i}`,
-      username: `Edward King ${i}`,
-      email: `Edward King ${i}`,
-      registrationDate: `London, Park Lane no. ${i}`,
-    });
-  }
 
   const rowSelection = {
     selectedRowKeys: [],
@@ -56,12 +93,16 @@ const User = (_props: Props) => {
   };
 
   return (
-    <Table
-      size="small"
-      rowSelection={rowSelection}
-      columns={columns}
-      dataSource={data}
-    />
+    <>
+      <CreateUser />
+      <Table
+        bordered={false}
+        size="small"
+        rowSelection={rowSelection}
+        columns={columns}
+        dataSource={listUser}
+      />
+    </>
   );
 };
 

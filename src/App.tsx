@@ -40,14 +40,18 @@ const App = () => {
     dispatch(setLanguge(i18n.resolvedLanguage));
   }, []);
 
+  console.log(token);
   return (
     <ConfigProvider
       theme={{
         algorithm: themeData.dark ? darkAlgorithm : defaultAlgorithm,
         token: {
           colorPrimary: themeData.color,
-          borderRadius: 2,
           fontSize: 13,
+          sizeStep: 3,
+          sizeUnit: 3,
+          borderRadius: 3,
+          fontFamily: 'Roboto',
         },
       }}
     >

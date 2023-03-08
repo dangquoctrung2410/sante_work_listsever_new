@@ -1,3 +1,4 @@
+import { ICreateGroup } from '../models/request/create-group.model';
 import { IPostLogin } from '../models/request/login.model';
 import { IPostRegister } from '../models/request/register.model';
 import { IResponse } from '../models/response/response.model';
@@ -19,25 +20,79 @@ class ServiceMonitor extends ServiceBase {
   login = async (data: IPostLogin) => {
     const url = '/iam/auth/login';
     const response: IResponse<any> = await this.service.post(url, data);
-    return response;
+    return response.data;
   };
 
   register = async (data: IPostRegister) => {
     const url = '/iam/auth/register';
     const response: IResponse<any> = await this.service.post(url, data);
-    return response;
+    return response.data;
   };
 
   getPolicies = async () => {
     const url = '/iam/users/policies';
     const response: IResponse<any> = await this.service.get(url);
-    return response;
+    return response.data;
   };
 
   getAllUser = async () => {
     const url = '/iam/users';
     const response: IResponse<any> = await this.service.get(url);
-    return response;
+    return response.data;
+  };
+
+  getAllGroup = async () => {
+    const url = '/iam/groups';
+    const response: IResponse<any> = await this.service.get(url);
+    return response.data;
+  };
+
+  getGroupOfUser = async (userId: string) => {
+    const url = `/iam/users/${userId}/group`;
+    const response: IResponse<any> = await this.service.get(url);
+    return response.data;
+  };
+
+  createGroup = async (data: ICreateGroup) => {
+    const url = '/iam/groups';
+    const response: IResponse<any> = await this.service.post(url, data);
+    return response.data;
+  };
+
+  getAllOrganization = async () => {
+    const url = '/iam/organizations';
+    const response: IResponse<any> = await this.service.get(url);
+    return response.data;
+  };
+
+  createOrganization = async (data: ICreateGroup) => {
+    const url = '/iam/organizations';
+    const response: IResponse<any> = await this.service.post(url, data);
+    return response.data;
+  };
+
+  getAllRole = async () => {
+    const url = '/iam/roles';
+    const response: IResponse<any> = await this.service.get(url);
+    return response.data;
+  };
+
+  createRole = async (data: ICreateGroup) => {
+    const url = '/iam/roles';
+    const response: IResponse<any> = await this.service.post(url, data);
+    return response.data;
+  };
+
+  getAllProject = async () => {
+    const url = '/iam/projects';
+    const response: IResponse<any> = await this.service.get(url);
+    return response.data;
+  };
+
+  createProject = async (data: ICreateGroup) => {
+    const url = '/iam/projects';
+    const response: IResponse<any> = await this.service.post(url, data);
+    return response.data;
   };
 }
 
