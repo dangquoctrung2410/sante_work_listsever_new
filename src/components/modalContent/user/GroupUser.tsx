@@ -15,7 +15,7 @@ import {
 } from '../../../redux/store';
 
 type Props = {};
-let values: string[] = [];
+let values: Array<string> = [];
 
 const GroupUser = (_props: Props) => {
   const dispatch = useAppDispatch();

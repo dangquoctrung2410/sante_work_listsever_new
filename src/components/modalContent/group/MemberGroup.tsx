@@ -53,8 +53,12 @@ const MemberGroup = (_props: Props) => {
       dataIndex: 'groups',
       render: (_text: any, record: any) => {
         const groups = record.groups;
-        return groups.map((group: any) => {
-          return <Link to={group.id}>{group.name}</Link>;
+        return groups.map((group: any, index: number) => {
+          return (
+            <Link key={index} to={group.id}>
+              {group.name}
+            </Link>
+          );
         });
       },
     },
