@@ -3,16 +3,16 @@
 import { I18nextProvider } from 'react-i18next';
 // import historyNote from './release/history.json'
 // import metadata from './release/metadata.json'
-import Router from './router/Router';
+// import Router from './router/Router';
 
-import { ConfigProvider, Layout, Space, theme, Typography } from 'antd';
+import { ConfigProvider, theme } from 'antd';
 import { useEffect } from 'react';
-import Language from './components/base/language/Language';
-import LoadingTopBar from './components/base/loading/LoadingTopBar';
+// import Language from './components/base/language/Language';
+// import LoadingTopBar from './components/base/loading/LoadingTopBar';
 // import Theme from './components/base/theme/Theme';
 import 'antd/dist/reset.css';
-import Theme from './components/base/theme/Theme';
-import ThemeMode from './components/base/theme/ThemeMode';
+// import Theme from './components/base/theme/Theme';
+// import ThemeMode from './components/base/theme/ThemeMode';
 import i18n from './i18n';
 import { setLanguge } from './reducers/slice/themeLanguageSlice';
 import {
@@ -23,7 +23,8 @@ import {
 } from './redux/store';
 import { serviceConfig } from './services/serviceManager';
 import styleModule from './style.module.scss';
-const { Text } = Typography;
+import Worklist from './pages/workslist/Worklist';
+// const { Text } = Typography;
 const { defaultAlgorithm, darkAlgorithm } = theme;
 
 const { useToken } = theme;
@@ -60,7 +61,8 @@ const App = () => {
           className={styleModule.app}
           style={{ background: token.colorBgBase }}
         >
-          <Layout className={styleModule.monitor}>
+          <Worklist />
+          {/* <Layout className={styleModule.monitor}>
             <LoadingTopBar />
             <div className={styleModule.header}>
               <Space>
@@ -81,7 +83,7 @@ const App = () => {
             <div className={styleModule.footer}>
               <Text>Footer</Text>
             </div>
-          </Layout>
+          </Layout> */}
         </div>
       </I18nextProvider>
     </ConfigProvider>
