@@ -1,12 +1,20 @@
+import { setOpenTbale } from '../../reducers/slice/tableSlice';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
 import styles from './Style.module.scss';
 
 type Props = {};
 
 const Headers = (_props: Props) => {
+  const dispath = useAppDispatch();
+  const openState = useAppSelector((state) => state.table);
+
   return (
     <div className={styles.header}>
       <div className={styles.headerContent}>
-        <div className={styles.headerItem}>
+        <div
+          className={styles.headerItem}
+          onClick={() => dispath(setOpenTbale(!openState))}
+        >
           <img src={process.env.PUBLIC_URL + '/settings.png'} alt="" />
           <span>Setup</span>
         </div>

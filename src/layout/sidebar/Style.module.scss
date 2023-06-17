@@ -1,52 +1,109 @@
 .sider {
-    width: 15%;
-    height: 100%;
-    border: none;
-    background-color: #08979c;
-    border-right: 5px solid #08979c;
-    margin-right: 5px;
-    background-color: #fff;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    .siderCell {
-      flex: 1;
-      border: 1px solid black;
-      margin-bottom: 10px;
-      .header {
-        background-color: #08979c;
-        height: 25px;
-        position: relative;
-        .text {
-          width: 100%;
-          height: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          text-wrap: nowrap;
-          color: #fff;
-        }
-      }
-      .siderCellMain {
+  width: 245px;
+  height: 100%;
+  border: none;
+  background-color: #08979c;
+  border-right: 5px solid #08979c;
+  margin-right: 5px;
+  background-color: #fff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  .siderCell {
+    flex: 1;
+    border: 1px solid black;
+    margin-bottom: 10px;
+    .header {
+      background-color: #08979c;
+      height: 25px;
+      position: relative;
+      .text {
         width: 100%;
         height: 100%;
-        padding: 10px;
         display: flex;
-        .mainButton {
+        justify-content: center;
+        align-items: center;
+        text-wrap: nowrap;
+        color: #fff;
+      }
+    }
+    .siderCellMain {
+      width: 100%;
+      height: 100%;
+      padding: 10px;
+      display: flex;
+      .mainButton {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        gap: 14px;
+        button {
+          width: 60px;
+          margin-bottom: 10px;
+          text-wrap: nowrap;
+          font-size: 8px;
+        }
+      }
+      .form {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        p {
+          height: 5px;
+        }
+        input {
+          width: 100px;
+        }
+        button {
+          width: 60px;
+          font-size: 8px;
+        }
+      }
+    }
+    .siderCellMain1 {
+      width: 100%;
+      height: 100%;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      .cellMainItem {
+        p {
+          height: 8px;
+        }
+        input {
+          width: 100%;
+        }
+      }
+
+      .cellMainItem1 {
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+        .check {
           display: flex;
-          flex-direction: column;
-          flex: 1;
-          button {
-            width: 45%;
-            margin-bottom: 10px;
-            text-wrap: nowrap;
-            font-size: 8px;
+          flex-direction: row;
+          gap: 10px;
+          p {
+            height: 4px;
+          }
+          input {
+            width: 16px;
           }
         }
-        .form {
-          flex: 1;
+        .dateButton {
+          display: flex;
+          justify-content: space-between;
+          input {
+            width: 86px;
+          }
+          button {
+            width: 74px;
+          }
         }
       }
     }
   }
+}

@@ -5,6 +5,7 @@ import monitorSlice from '../reducers/slice/monitorSlice';
 import organizationSlice from '../reducers/slice/organizationSlice';
 import projectSlice from '../reducers/slice/projectSlice';
 import roleSlice from '../reducers/slice/roleSlice';
+import tableSlice from '../reducers/slice/tableSlice';
 import themeLanguageSlice from '../reducers/slice/themeLanguageSlice';
 import userSlice from '../reducers/slice/userSlice';
 
@@ -18,5 +19,6 @@ const rootReducer: any = {
   organization: organizationSlice,
   role: roleSlice,
   project: projectSlice,
+  table: tableSlice,
 };
 export { rootReducer };

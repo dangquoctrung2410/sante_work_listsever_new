@@ -1,5 +1,5 @@
 import styles from './Style.module.scss';
-import { Button, Layout } from 'antd';
+import { Layout } from 'antd';
 const { Header } = Layout;
 
 type Props = {};
@@ -21,6 +21,9 @@ const Sidebars = (_props: Props) => {
           <div className={styles.form}>
             <p>Study date form</p>
             <input type="date" />
+            <p>Study date to</p>
+            <input type="date" />
+            <button>Search all</button>
           </div>
         </div>
       </div>
@@ -28,7 +31,30 @@ const Sidebars = (_props: Props) => {
         <Header className={styles.header}>
           <div className={styles.text}>Query Options</div>
         </Header>
-        <div className={styles.siderCellMain}>
+        <div className={styles.siderCellMain1}>
+          <div className={styles.cellMainItem}>
+            <p>Patient Name</p>
+            <input type="text" />
+          </div>
+          <div className={styles.cellMainItem}>
+            <p>Patient ID</p>
+            <input type="text" />
+          </div>
+          <div className={styles.cellMainItem}>
+            <p>Accession Number</p>
+            <input type="text" />
+          </div>
+          <div className={styles.cellMainItem1}>
+            <div className={styles.check}>
+              <input type="checkbox" />
+              <p>Date of birth</p>
+            </div>
+            <div className={styles.dateButton}>
+              <input type="date" />
+              <button>aaa</button>
+            </div>
+          </div>
+
           <div />
           <div />
         </div>
@@ -39,7 +65,11 @@ const Sidebars = (_props: Props) => {
         </Header>
         <div className={styles.siderCellMain}>
           <div>
-            <Button type="primary">a</Button>
+            <select name="1" id="">
+              <option value="aaa">aaa</option>
+              <option value="aaa">aaa</option>
+              <option value="aaa">aaa</option>
+            </select>
           </div>
           <div />
         </div>
