@@ -3,12 +3,12 @@ import styles from './Style.module.scss';
 import Headers from '../../layout/header/Header';
 import Contents from '../../layout/content/Content';
 import { useSelector } from 'react-redux';
-import MainTable from '../../layout/maintable/MainTable';
+import ContentHeaderSetup from '../../layout/container/contents/ContentHeaderSetup';
 
 const { Header } = Layout;
 type Props = {};
 
-const Worklist = (_props: Props) => {
+const WorklistPage = (_props: Props) => {
   const openTable = useSelector((state: any) => state.table);
 
   return (
@@ -18,11 +18,11 @@ const Worklist = (_props: Props) => {
           <Headers />
         </Header>
         <Layout className={styles.mainContent}>
-          {openTable ? <MainTable /> : <Contents />}
+          {openTable ? <ContentHeaderSetup /> : <Contents />}
         </Layout>
       </Layout>
     </div>
   );
 };
 
-export default Worklist;
+export default WorklistPage;

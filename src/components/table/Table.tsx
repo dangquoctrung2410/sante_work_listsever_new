@@ -26,7 +26,7 @@ const Tables = (_props: Props) => {
 
   return (
     <div className={styles.table}>
-      <Table columns={columns} dataSource={newData}></Table>
+      <Table columns={columns} dataSource={newData}/>
     </div>
     // <table className={styles.table}>
     //   <thead>

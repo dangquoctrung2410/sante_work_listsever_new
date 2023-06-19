@@ -1,10 +1,10 @@
 import { Button, Layout } from 'antd';
 import styles from './Styles.module.scss';
 import { useState } from 'react';
-import WorkListContent from '../../components/worklistcontent/WorkListContent';
-import AcquissitonContent from '../../components/acquissitioncontent/AcquissitonContent';
-import ReviewContent from '../../components/reviewcontent/ReviewContent';
-import ConfigContent from '../../components/config/ConfigContent';
+import WorkListContent from '../../../components/worklistcontent/WorkListContent';
+import AcquissitonContent from '../../../components/acquissitioncontent/AcquissitonContent';
+import ReviewContent from '../../../components/reviewcontent/ReviewContent';
+import ConfigContent from '../../../components/config/ConfigContent';
 const { Content, Sider } = Layout;
 
 type Props = {};
@@ -32,7 +32,7 @@ const Item = [
   },
 ];
 
-const MainTable = (_props: Props) => {
+const ContentHeaderSetup = (_props: Props) => {
   const [active, setActive] = useState(Item);
 
   const handleActiveButton = (index: any) => {
@@ -80,4 +80,4 @@ const MainTable = (_props: Props) => {
   );
 };
 
-export default MainTable;
+export default ContentHeaderSetup;

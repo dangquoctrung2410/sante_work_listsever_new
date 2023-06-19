@@ -23,8 +23,8 @@ import {
 } from './redux/store';
 import { serviceConfig } from './services/serviceManager';
 import styleModule from './style.module.scss';
-import Worklist from './pages/workslist/Worklist';
 import LoadingTopBar from './components/base/loading/LoadingTopBar';
+import WorklistPage from './pages/workslist/Worklist';
 // const { Text } = Typography;
 const { defaultAlgorithm, darkAlgorithm } = theme;
 
@@ -67,7 +67,7 @@ const App = () => {
           {!loading ? (
             <>
               <LoadingTopBar />
-              <Worklist />
+              <WorklistPage />
             </>
           ) : (
             'loading'

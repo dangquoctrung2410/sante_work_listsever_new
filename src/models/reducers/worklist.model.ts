@@ -1,9 +1,9 @@
 export interface IWorklistItem {
   transferSyntaxUid: string;
-  elements: Elements;
+  elements: IElements;
 }
 
-export interface Elements {
+export interface IElements {
   _vrMap: any;
   StudyDate: string;
   StudyTime: string;
@@ -13,9 +13,9 @@ export interface Elements {
   InstitutionName: string;
   ReferringPhysicianName: string;
   StudyDescription: string;
-  ProcedureCodeSequence: any[];
+  ProcedureCodeSequence: Array<any>;
   AdmittingDiagnosesDescription: string;
-  ReferencedStudySequence: any[];
+  ReferencedStudySequence: Array<any>;
   PatientName: string;
   PatientID: string;
   IssuerOfPatientID: string;
@@ -33,7 +33,7 @@ export interface Elements {
   StudyID: string;
   RequestingPhysician: string;
   RequestedProcedureDescription: string;
-  RequestedProcedureCodeSequence: any[];
+  RequestedProcedureCodeSequence: Array<any>;
   AdmissionID: string;
   SpecialNeeds: string;
   CurrentPatientLocation: string;

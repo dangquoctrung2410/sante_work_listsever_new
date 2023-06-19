@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import styles from './ConfigContent.module.scss';
 import { Layout } from 'antd';
-import WorkListConfig from '../WorklistConfigContent/WorkListConfig';
+import HeaderWorkListConfigContent from '../HeaderWorklistConfigContent/HeaderWorkListConfigContent';
 const { Header, Footer, Content } = Layout;
 
 type Props = {};
 
 const dataActive = [
   {
-    title: 'Worlist',
+    title: 'Worklist',
     active: true,
-    content: <WorkListConfig />,
+    content: <HeaderWorkListConfigContent />,
   },
   {
     title: 'Acquisition',
