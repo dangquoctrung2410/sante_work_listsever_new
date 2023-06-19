@@ -6,7 +6,7 @@ import { I18nextProvider } from 'react-i18next';
 // import Router from './router/Router';
 
 import { ConfigProvider, theme } from 'antd';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 // import Language from './components/base/language/Language';
 // import LoadingTopBar from './components/base/loading/LoadingTopBar';
 // import Theme from './components/base/theme/Theme';
@@ -24,6 +24,7 @@ import {
 import { serviceConfig } from './services/serviceManager';
 import styleModule from './style.module.scss';
 import Worklist from './pages/workslist/Worklist';
+import LoadingTopBar from './components/base/loading/LoadingTopBar';
 // const { Text } = Typography;
 const { defaultAlgorithm, darkAlgorithm } = theme;
 
@@ -31,6 +32,7 @@ const { useToken } = theme;
 
 const App = () => {
   const { token } = useToken();
+  const [loading, setLoading] = useState(true);
 
   const themeData = useAppSelector(
     (state: RootState) => state.themeLanguage.theme,
@@ -39,6 +41,7 @@ const App = () => {
   useEffect(() => {
     serviceConfig(getStore());
     dispatch(setLanguge(i18n.resolvedLanguage));
+    setLoading(false);
   }, []);
 
   console.log(token);
@@ -61,7 +64,15 @@ const App = () => {
           className={styleModule.app}
           style={{ background: token.colorBgBase }}
         >
-          <Worklist />
+          {!loading ? (
+            <>
+              <LoadingTopBar />
+              <Worklist />
+            </>
+          ) : (
+            'loading'
+          )}
+
           {/* <Layout className={styleModule.monitor}>
             <LoadingTopBar />
             <div className={styleModule.header}>

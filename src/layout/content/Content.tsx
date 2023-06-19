@@ -16,7 +16,7 @@ const Contents = (_props: Props) => {
         </Header>
         <Content className={styles.contentMain}>
           <div className={styles.contentMainItem}>
-            <Table></Table>
+            <Table/>
           </div>
         </Content>
       </Content>

@@ -8,6 +8,7 @@ import roleSlice from '../reducers/slice/roleSlice';
 import tableSlice from '../reducers/slice/tableSlice';
 import themeLanguageSlice from '../reducers/slice/themeLanguageSlice';
 import userSlice from '../reducers/slice/userSlice';
+import worklistSlice from '../reducers/slice/worklistSlice';
 
 const rootReducer: any = {
   auth: authSlice,
@@ -20,5 +21,6 @@ const rootReducer: any = {
   role: roleSlice,
   project: projectSlice,
   table: tableSlice,
+  worklist: worklistSlice,
 };
 export { rootReducer };

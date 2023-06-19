@@ -7,7 +7,7 @@ type Props = {};
 const MainTable = (_props: Props) => {
   return (
     <Content className={styles.contentItem}>
-      <Header className={styles.header}></Header>
+      <Header className={styles.header}/>
     </Content>
   );
 };

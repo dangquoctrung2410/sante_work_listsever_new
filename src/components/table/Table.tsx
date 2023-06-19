@@ -1,16 +1,26 @@
 import { COLUMNS } from './Columns';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import styles from './Styles.module.scss';
-import data from '../../mocks/response.json';
+// import data from '../../mocks/response.json';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
+import { IWorklistItem } from '../../models/reducers/worklist.model';
+import { getWorklist } from '../../reducers/slice/worklistSlice';
 
 type Props = {};
 
 const Table = (_props: Props) => {
-  const cloneDta: Array<any> = data.data;
+  // const cloneDta: Array<any> = data.data;
+  const dispatch = useAppDispatch();
+  const worklistData: Array<IWorklistItem> = useAppSelector(
+    (state) => state.worklist,
+  );
 
+  useEffect(() => {
+    dispatch(getWorklist());
+  }, []);
+
+  console.log('worklistData', worklistData);
   const columns = useMemo(() => COLUMNS, []);
-
-  console.log(cloneDta);
 
   return (
     <table className={styles.table}>
@@ -24,7 +34,7 @@ const Table = (_props: Props) => {
         </tr>
       </thead>
 
-      {cloneDta.map((patient, index: number) => (
+      {worklistData.map((patient, index: number) => (
         <tbody key={index}>
           <tr className={styles.tr}>
             <td className={styles.td}>{index + 1}</td>
@@ -47,9 +57,7 @@ const Table = (_props: Props) => {
             <td className={styles.td}>
               {patient.elements.ReferringPhysicianName}
             </td>
-            <td className={styles.td}>
-              {patient.elements.RequestedProcedureID}
-            </td>
+            <td className={styles.td}></td>
             <td className={styles.td}>{patient.elements.SpecialNeeds}</td>
           </tr>
         </tbody>
