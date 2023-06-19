@@ -6,6 +6,7 @@
     "@ant-design/icons": "^5.0.1",
     "@casl/ability": "^6.3.3",
     "@casl/react": "^3.1.0",
+    "@mui/material": "^5.13.5",
     "@reduxjs/toolkit": "^1.9.1",
     "@stdlib/string-acronym": "^0.1.0",
     "@testing-library/jest-dom": "^5.16.5",

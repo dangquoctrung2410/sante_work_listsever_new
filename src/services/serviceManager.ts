@@ -19,7 +19,7 @@ export const onUnauthenticated: any = (store: any) => {
 export const servicesManager: IServicesManager = defaultServicesManager;
 
 export const serviceConfig = (store: any) => {
-  const worklistURL = 'http://localhost:3018/v1';
+  const worklistURL = 'http://192.168.1.36:3018/v1';
   const monitorURL = 'http://localhost:3018/v1';
 
   const serviceWorklist = new ServiceWorklist(

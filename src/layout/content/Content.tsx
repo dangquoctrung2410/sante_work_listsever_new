@@ -1,7 +1,7 @@
 import { Layout } from 'antd';
 import styles from './Style.module.scss';
 import Sidebars from '../sidebar/Sidebars';
-import Table from '../../components/table/Table';
+import Tables from '../../components/table/Table';
 const { Header, Content } = Layout;
 
 type Props = {};
@@ -16,7 +16,7 @@ const Contents = (_props: Props) => {
         </Header>
         <Content className={styles.contentMain}>
           <div className={styles.contentMainItem}>
-            <Table/>
+            <Tables />
           </div>
         </Content>
       </Content>

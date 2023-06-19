@@ -1,0 +1,43 @@
+.layout {
+  width: 100%;
+  height: 100%;
+  .layoutContent {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    .header {
+      height: 50px;
+      width: 95%;
+      margin-top: -25px;
+      border: 1px solid black;
+      background-color: white;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      padding: 0;
+      gap: 3px;
+      .button {
+        width: calc(100% / 9);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        white-space: nowrap;
+        overflow: hidden;
+        padding: 0 10px;
+      }
+    }
+    .content {
+      width: 100%;
+      height: 100%;
+      .contentMain {
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+      }
+    }
+  }
+}

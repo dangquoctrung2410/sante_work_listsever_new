@@ -1,18 +1,18 @@
 export const COLUMNS = [
   {
     title: '#',
-    name: '',
     key: '1',
+    dataIndex: 'PatientID',
   },
   {
     title: 'Patient Name',
     key: '2',
-    name: 'PatientName',
+    dataIndex: 'PatientName',
   },
   {
     title: 'Patient ID',
     key: '3',
-    name: 'PatientID',
+    dataIndex: 'StudyInstanceID',
   },
   {
     title: 'Birth Date',

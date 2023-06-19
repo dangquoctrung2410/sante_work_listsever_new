@@ -10,7 +10,6 @@ type Props = {};
 
 const Worklist = (_props: Props) => {
   const openTable = useSelector((state: any) => state.table);
-  console.log(openTable);
 
   return (
     <div className={styles.container}>
