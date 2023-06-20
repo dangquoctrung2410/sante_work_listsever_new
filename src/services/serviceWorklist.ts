@@ -1,4 +1,5 @@
-import { IResponse } from '../models/response/IResponse';
+import { IItem } from '../models/reducers/posttest.model';
+import { IRequest, IResponse } from '../models/response/IResponse';
 import { ServiceBase } from './serviceBase';
 
 class ServiceWorklist extends ServiceBase {
@@ -10,6 +11,12 @@ class ServiceWorklist extends ServiceBase {
     const url = '/scp/modalityWorklist';
     const response: IResponse<any> = await this.service.post(url);
     return response.data;
+  };
+
+  potsWorklist = async (data: IItem) => {
+    const url = '/scu/echo';
+    const response: IRequest = await this.service.post(url, data);
+    return response;
   };
 }
 

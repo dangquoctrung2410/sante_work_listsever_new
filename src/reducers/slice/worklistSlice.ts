@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IItem } from '../../models/reducers/posttest.model';
 import {
   defaultWorklist,
   IWorklistItem,
@@ -11,6 +12,14 @@ export const getWorklist = createAsyncThunk('worklist/get', async () => {
   const service = servicesManager.serviceWorklist;
   return service?.getWorklist();
 });
+
+export const potsWorklist = createAsyncThunk(
+  'worklist/post',
+  async (data: IItem) => {
+    const service = servicesManager.serviceWorklist;
+    return service?.potsWorklist(data);
+  },
+);
 
 const worklistSlice = createSlice({
   name: 'worklist',

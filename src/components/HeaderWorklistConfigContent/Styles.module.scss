@@ -35,12 +35,15 @@
           display: flex;
           flex-direction: column;
           gap: 10px;
-          div{
+          div {
             display: flow-root;
-            input{
-              float: right
+            input {
+              width: 100%;
+              padding: 7px 8px;
+              display: inline-block;
+              border: 1px solid #ccc;
+              box-sizing: border-box;
             }
-
           }
         }
         .itemRight {
@@ -48,74 +51,35 @@
           height: 100%;
           position: relative;
           margin-left: 5px;
-          .buttonleft{
-            position: absolute;
-            top: 48%;
-            background-color: blue;
-          }
-          .buttonright{
-            position: absolute;
-            right: 0%;
-            top: 8%;
-            background-color: blue;
-          }
-        }
-      }
-    }
-    .right {
-      flex: 1;
-      width: 100%;
-      height: 100%;
-      border: 1px solid black;
-      span {
-        display: block;
-        width: 85px;
-        background-color: #fff;
-        height: 10px;
-        margin-top: -10px;
-        margin-left: 8px;
-       
-      }
-      .rightContent {
-        width: 100%;
-        height: 100%;
-        padding: 15px;
-        display: flex;
-        .itemLeft{
-          width: 70%;
-          height: 100%;
-          padding: 20px 0;
           display: flex;
           flex-direction: column;
-          gap: 10px;
-          div{
-            display: flow-root;
-            input{
-              float: right
-            }
-
+          gap: 30px;
+          align-items: flex-end;
+          padding: 36px;
+          .buttonright {
+            background-color: #1677ff;
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 10px;
+            font-size: 10px;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
           }
-        }
-        .itemRight {
-          width: 30%;
-          height: 100%;
-          position: relative;
-          margin-left: 5px;
-    
-          .buttonright{
-            position: absolute;
-            right: 0%;
-            top: 8%;
-            background-color: blue;
+          .buttonbottom {
+            background-color: #8c8c8c;
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 10px;
+            font-size: 10px;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
           }
         }
       }
     }
-  }
-  .contentBottom {
-    flex: 1;
-    width: 100%;
-    height: 100%;
-    border: 1px solid black;
   }
 }

@@ -2,6 +2,8 @@ import { useState } from 'react';
 import styles from './ConfigContent.module.scss';
 import { Layout } from 'antd';
 import HeaderWorkListConfigContent from '../HeaderWorklistConfigContent/HeaderWorkListConfigContent';
+import HeaderSystemConfig from '../HeaderSystemConfig/HeaderSystemConfig';
+import HeaderPrinterConfig from '../HeaderPrinterConfig/HeaderPrinterConfig';
 const { Header, Footer, Content } = Layout;
 
 type Props = {};
@@ -20,7 +22,7 @@ const dataActive = [
   {
     title: 'System',
     active: false,
-    content: 'c',
+    content: <HeaderSystemConfig />,
   },
   {
     title: 'PACS',
@@ -30,7 +32,7 @@ const dataActive = [
   {
     title: 'Printer',
     active: false,
-    content: 'e',
+    content: <HeaderPrinterConfig />,
   },
   {
     title: 'Annotation',
@@ -95,7 +97,9 @@ const ConfigContent = (_props: Props) => {
           )}
         </Content>
       </Layout>
-      <Footer className={styles.footer}>footer</Footer>
+      <Footer className={styles.footer}>
+        <button className={styles.footerbutton}>Apply</button>
+      </Footer>
     </Layout>
   );
 };
