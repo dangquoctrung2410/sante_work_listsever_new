@@ -10,17 +10,16 @@
     flex-direction: column;
     .headerMain {
       width: 100%;
-      height: 13%;
+      height: 85px;
       color: black;
       padding: 15px;
       background-color: #fff;
-  }
+    }
     .mainContent {
       width: 100%;
-      height: 87%;
+      height: calc(100% - 85px);
       background-color: #fff;
       padding: 15px;
-     
     }
   }
 }

@@ -5,6 +5,7 @@ import {
   IWorklistItem,
 } from '../../models/reducers/worklist.model';
 import { servicesManager } from '../../services/serviceManager';
+import { IAddworklist } from '../../models/reducers/addworklist.model';
 
 const initialState: Array<IWorklistItem> = defaultWorklist;
 
@@ -18,6 +19,13 @@ export const potsWorklist = createAsyncThunk(
   async (data: IItem) => {
     const service = servicesManager.serviceWorklist;
     return service?.potsWorklist(data);
+  },
+);
+export const addWorklist = createAsyncThunk(
+  'addworklist/post',
+  async (data: IAddworklist) => {
+    const service = servicesManager.serviceWorklist;
+    return service?.addWorklist(data);
   },
 );
 

@@ -4,7 +4,6 @@
   border: 1px solid black;
   display: flex;
   position: relative;
-  background-color: aqua;
   .sider {
     height: 100%;
     background-color: aliceblue;
@@ -18,11 +17,30 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
+        .buttonIcon {
+          border-radius: 10px;
+          width: 100%;
+          height: 45px;
+          border: none;
+          background-image: linear-gradient(to right, #141e30, #243b55);
+          color: #d9d9d9;
+          cursor: pointer;
+          box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+        }
+        .buttonIconActive {
+          border-radius: 10px;
+          width: 100%;
+          height: 45px;
+          border: none;
+          background-color: #ffa940;
+          color: #d9d9d9;
+          cursor: pointer;
+          box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+        }
       }
     }
   }
   .contentMain {
-    background-color: bisque;
     .divMain {
       width: 100%;
       height: 100%;

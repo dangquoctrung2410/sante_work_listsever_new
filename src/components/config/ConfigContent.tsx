@@ -76,11 +76,8 @@ const ConfigContent = (_props: Props) => {
           {active.map((item, index) => (
             <div
               onClick={() => handleActiveButton(index)}
-              style={{
-                backgroundColor: item.active ? '#ffa940' : '#dddd',
-              }}
               key={index}
-              className={styles.button}
+              className={item.active ? styles.buttonActive : styles.button}
             >
               {item.title}
             </div>

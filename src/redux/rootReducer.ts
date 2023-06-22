@@ -1,4 +1,5 @@
 import authSlice from '../reducers/slice/authSlice';
+import dicomNodeSlice from '../reducers/slice/dicomNodeSlice';
 import groupSlice from '../reducers/slice/groupSlice';
 import loadingBarSlice from '../reducers/slice/loadingBarSlice';
 import monitorSlice from '../reducers/slice/monitorSlice';
@@ -22,5 +23,6 @@ const rootReducer: any = {
   project: projectSlice,
   table: tableSlice,
   worklist: worklistSlice,
+  dicomNode: dicomNodeSlice,
 };
 export { rootReducer };

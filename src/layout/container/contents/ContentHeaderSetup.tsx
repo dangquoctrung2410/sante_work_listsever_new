@@ -53,10 +53,13 @@ const ContentHeaderSetup = (_props: Props) => {
           <div className={styles.divChildren}>
             {active.map((item, index) => (
               <Button
-                style={{
-                  backgroundColor: item.active ? '#ffa940' : 'black',
-                  color: item.active ? 'black' : 'white',
-                }}
+                className={
+                  item.active ? styles.buttonIconActive : styles.buttonIcon
+                }
+                // style={{
+                //   backgroundColor: item.active ? '#ffa940' : 'black',
+                //   color: item.active ? 'black' : 'white',
+                // }}
                 key={index}
                 onClick={() => handleActiveButton(index)}
               >
