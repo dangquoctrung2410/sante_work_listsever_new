@@ -1,17 +1,12 @@
 import styles from './Styles.module.scss';
 import { Select, Space } from 'antd';
-import type { SelectProps } from 'antd';
+import {
+  storageClassAccepted,
+  sopClassAccepted,
+  transcodableTransferSyntaxess,
+} from '../data/data';
 
 type Props = {};
-
-const options: SelectProps['options'] = [];
-
-for (let i = 11; i < 36; i++) {
-  options.push({
-    label: i.toString(36) + i,
-    value: i.toString(36) + i,
-  });
-}
 
 const handleChange = (value: string[]) => {
   console.log(`selected ${value}`);
@@ -62,7 +57,12 @@ const HeaderSystemConfig = (_props: Props) => {
                 allowClear
                 style={{ width: '100%' }}
                 onChange={handleChange}
-                options={options}
+                options={storageClassAccepted.map((item) => {
+                  return {
+                    label: `${item}`,
+                    value: item,
+                  };
+                })}
               />
             </Space>
           </div>
@@ -74,7 +74,12 @@ const HeaderSystemConfig = (_props: Props) => {
                 allowClear
                 style={{ width: '100%' }}
                 onChange={handleChange}
-                options={options}
+                options={sopClassAccepted.map((item) => {
+                  return {
+                    label: `${item}`,
+                    value: item,
+                  };
+                })}
               />
             </Space>
           </div>
@@ -86,7 +91,12 @@ const HeaderSystemConfig = (_props: Props) => {
                 allowClear
                 style={{ width: '100%' }}
                 onChange={handleChange}
-                options={options}
+                options={transcodableTransferSyntaxess.map((item) => {
+                  return {
+                    label: `${item}`,
+                    value: item,
+                  };
+                })}
               />
             </Space>
           </div>

@@ -1,69 +1,47 @@
 export const COLUMNS = [
   {
-    title: '#',
+    title: 'Patient ID',
     key: '1',
-    dataIndex: 'PatientID',
+    dataIndex: 'patientId',
+    ellipsis: true,
   },
   {
     title: 'Patient Name',
     key: '2',
-    dataIndex: 'PatientName',
-  },
-  {
-    title: 'Patient ID',
-    key: '3',
-    dataIndex: 'StudyInstanceID',
-  },
-  {
-    title: 'Birth Date',
-    key: '4',
-  },
-  {
-    title: 'Sex',
-    key: '5',
+    dataIndex: 'patientName',
+    ellipsis: true,
   },
   {
     title: 'Accession Number',
-    key: '6',
+    dataIndex: 'accessionNumber',
+    key: '3',
+    ellipsis: true,
   },
   {
-    title: 'Requesting Physician',
-    key: '7',
-  },
-  {
-    title: 'Requested Procedure',
-    key: '8',
+    title: 'Patient Code',
+    dataIndex: 'patientCode',
+    key: '4',
+    ellipsis: true,
   },
   {
     title: 'Modality',
-    key: '9',
-  },
-  {
-    title: 'Start Date',
-    key: '10',
-  },
-  {
-    title: 'Start Time',
-    key: '11',
-  },
-  {
-    title: 'Status',
-    key: '12',
+    dataIndex: 'modality',
+    key: '5',
+    ellipsis: true,
   },
   {
     title: 'Scheduled AE Title',
     key: '13',
+    ellipsis: true,
   },
   {
     title: 'Scheduled Atation Name',
     key: '14',
+    ellipsis: true,
   },
   {
     title: 'Requested Procedure ID',
     key: '15',
-  },
-  {
-    title: '',
-    key: '16',
+    ellipsis: true,
   },
 ];

@@ -91,11 +91,11 @@ const TableDicom = (_props: Props) => {
             id: dataDcom.id,
             data: {
               host: dataDcom.host,
-              port: dataDcom.port,
+              port: Number(dataDcom.port),
               aetitle: dataDcom.aetitle,
             },
           };
-          console.log(data);
+          console.log('123', data);
           dispath(updateWorklist(data));
           dispath(getAllWorklist());
 

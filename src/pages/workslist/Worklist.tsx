@@ -1,11 +1,11 @@
 import { Layout } from 'antd';
 import styles from './Style.module.scss';
-import Headers from '../../layout/header/Header';
 import Contents from '../../layout/content/Content';
 import { useSelector } from 'react-redux';
 import ContentHeaderSetup from '../../layout/container/contents/ContentHeaderSetup';
+import SiderLeftLayout from '../../layout/siderbarleftlayout/SiderLeftLayout';
 
-const { Header } = Layout;
+const { Sider } = Layout;
 type Props = {};
 
 const WorklistPage = (_props: Props) => {
@@ -14,9 +14,9 @@ const WorklistPage = (_props: Props) => {
   return (
     <div className={styles.container}>
       <Layout className={styles.main}>
-        <Header className={styles.headerMain}>
-          <Headers />
-        </Header>
+        <Sider className={styles.siderLeft}>
+          <SiderLeftLayout />
+        </Sider>
         <Layout className={styles.mainContent}>
           {openTable ? <ContentHeaderSetup /> : <Contents />}
         </Layout>

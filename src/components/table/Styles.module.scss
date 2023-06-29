@@ -8,6 +8,9 @@
     th {
       border: 1px solid white;
       background-color: #b37feb;
+      .ant-table-cell {
+        font-size: 8px !important;
+      }
     }
     .td,
     .th {

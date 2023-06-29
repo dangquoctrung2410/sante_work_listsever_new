@@ -16,6 +16,8 @@ const Tables = (_props: Props) => {
     (state) => state.worklist,
   );
 
+  console.log(worklistData);
+
   useEffect(() => {
     dispatch(getWorklist());
   }, []);
@@ -24,7 +26,7 @@ const Tables = (_props: Props) => {
 
   return (
     <div className={styles.table}>
-      <Table columns={columns} dataSource={newData} />
+      <Table columns={columns} dataSource={newData} size="small" />
     </div>
   );
 };

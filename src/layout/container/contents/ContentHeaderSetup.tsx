@@ -56,10 +56,6 @@ const ContentHeaderSetup = (_props: Props) => {
                 className={
                   item.active ? styles.buttonIconActive : styles.buttonIcon
                 }
-                // style={{
-                //   backgroundColor: item.active ? '#ffa940' : 'black',
-                //   color: item.active ? 'black' : 'white',
-                // }}
                 key={index}
                 onClick={() => handleActiveButton(index)}
               >

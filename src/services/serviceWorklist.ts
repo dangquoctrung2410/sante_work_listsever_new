@@ -19,6 +19,7 @@ class ServiceWorklist extends ServiceBase {
     const response: IRequest = await this.service.post(url, data);
     return response;
   };
+
   addWorklist = async (data: IAddworklist) => {
     const url = '/dicom-node';
     const response: IRequest = await this.service.post(url, data);
