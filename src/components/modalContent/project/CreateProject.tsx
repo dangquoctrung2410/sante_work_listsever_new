@@ -10,7 +10,6 @@ import {
   useAppDispatch,
   useAppSelector,
 } from '../../../redux/store';
-import { acronymString } from '../../../utils/convertString';
 
 type Props = {};
 
@@ -41,7 +40,7 @@ const CreateProject = (_props: Props) => {
       <Form.Item label="Name" name="name">
         <Input
           onChange={(e) => {
-            form.setFieldValue('key', acronymString(e.target.value));
+            form.setFieldValue('key', e.target.value);
           }}
         />
       </Form.Item>

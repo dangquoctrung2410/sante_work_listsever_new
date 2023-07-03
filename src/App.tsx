@@ -1,18 +1,7 @@
-// import i18next from 'i18next'
-// import { useEffect } from 'react'
 import { I18nextProvider } from 'react-i18next';
-// import historyNote from './release/history.json'
-// import metadata from './release/metadata.json'
-// import Router from './router/Router';
-
 import { ConfigProvider, theme } from 'antd';
 import { useEffect, useState } from 'react';
-// import Language from './components/base/language/Language';
-// import LoadingTopBar from './components/base/loading/LoadingTopBar';
-// import Theme from './components/base/theme/Theme';
 import 'antd/dist/reset.css';
-// import Theme from './components/base/theme/Theme';
-// import ThemeMode from './components/base/theme/ThemeMode';
 import LoadingTopBar from './components/base/loading/LoadingTopBar';
 import i18n from './i18n';
 import WorklistPage from './pages/workslist/Worklist';
@@ -24,7 +13,7 @@ import {
   useAppSelector,
 } from './redux/store';
 import { serviceConfig } from './services/serviceManager';
-// const { Text } = Typography;
+
 const { defaultAlgorithm, darkAlgorithm } = theme;
 
 const { useToken } = theme;
@@ -38,7 +27,7 @@ const App = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     serviceConfig(getStore());
-    dispatch(setLanguge(i18n.resolvedLanguage));
+    dispatch(setLanguge(i18n.resolvedLanguage || 'en'));
     setLoading(false);
   }, []);
 
@@ -62,7 +51,6 @@ const App = () => {
             background: token.colorBgBase,
             width: '100%',
             height: '100vh',
-            position: 'relative',
           }}
         >
           {!loading ? (

@@ -7,6 +7,7 @@ import {
   IWorklist,
 } from '../../models/reducers/worklist.model';
 import { servicesManager } from '../../services/serviceManager';
+import { DEFAULT } from '../../utils/constants';
 
 const initialState: IWorklist = defaultWorklist;
 
@@ -30,6 +31,15 @@ export const addWorklist = createAsyncThunk(
   async (data: IAddworklist) => {
     const service = servicesManager.serviceWorklist;
     return service?.addWorklist(data);
+  },
+);
+
+export const createPatient = createAsyncThunk(
+  'worklist/create',
+  async (data: any, { dispatch }) => {
+    const service = servicesManager.serviceWorklist;
+    await service?.createPatient(data);
+    return dispatch(getWorklist({ limit: DEFAULT.limit }));
   },
 );
 

@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import { DEFAULT } from '../../utils/constants';
 
 export interface IWorklistItem {
-  transferSyntaxUid: string;
+  status: number;
   elements: IElements;
 }
 
