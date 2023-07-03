@@ -33,7 +33,7 @@ const Login = ({}: Props) => {
       <Space direction="vertical" align="center">
         <Avatar
           size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
-          icon={<AntDesignOutlined />}
+          icon={<AntDesignOutlined rev={undefined} />}
         />
         <Title style={{ fontSize: 22 }} level={5}>
           <Translate contentKey="login.title" />
@@ -58,7 +58,10 @@ const Login = ({}: Props) => {
               },
             ]}
           >
-            <Input prefix={<UserOutlined />} placeholder="Username" />
+            <Input
+              prefix={<UserOutlined rev={undefined} />}
+              placeholder="Username"
+            />
           </Form.Item>
           <Form.Item
             name="password"
@@ -72,7 +75,7 @@ const Login = ({}: Props) => {
             ]}
           >
             <Input
-              prefix={<LockOutlined />}
+              prefix={<LockOutlined rev={undefined} />}
               type="password"
               placeholder="Password"
             />

@@ -16,8 +16,8 @@ const ThemeMode = (_props: Props) => {
 
   return (
     <Switch
-      checkedChildren={<CheckOutlined />}
-      unCheckedChildren={<CloseOutlined />}
+      checkedChildren={<CheckOutlined rev={undefined} />}
+      unCheckedChildren={<CloseOutlined rev={undefined} />}
       checked={isThemeDark}
       onChange={() => {
         dispatch(setThemeDarkMode());

@@ -30,7 +30,7 @@ const Project = (_props: Props) => {
         itemLayout="horizontal"
         dataSource={listProject}
         renderItem={(item: any) => (
-          <List.Item actions={[<MoreOutlined key={1} />]}>
+          <List.Item actions={[<MoreOutlined key={1} rev={undefined} />]}>
             <List.Item.Meta
               avatar={
                 <Avatar

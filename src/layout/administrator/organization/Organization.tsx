@@ -40,7 +40,7 @@ const Organization = (_props: Props) => {
         return (
           <Space>
             <Link to={record.id}>
-              <GroupOutlined /> {record.name}
+              <GroupOutlined rev={undefined} /> {record.name}
             </Link>
             <Text
               ellipsis={true}

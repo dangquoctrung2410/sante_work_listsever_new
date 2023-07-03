@@ -1,6 +1,38 @@
+import dayjs from 'dayjs';
+import { DEFAULT } from '../../utils/constants';
+
 export interface IWorklistItem {
   transferSyntaxUid: string;
   elements: IElements;
+}
+
+export interface IWorklist {
+  worklistData: {
+    data: Array<IWorklistItem>;
+    meta: {
+      currentPage: number;
+      itemsPerPage: number;
+      totalItems: number;
+      totalPages: number;
+    };
+  };
+  queryParams: IQueryParams;
+}
+
+export interface IQueryParams {
+  limit?: number;
+  page?: number;
+  sortBy?: string;
+  select?: string;
+  startDate: string;
+  endDate: string;
+  filter?: {
+    patientId?: string;
+    patientCode?: string;
+    patientName?: string;
+    modality?: string;
+    accessionNumber?: string;
+  };
 }
 
 export interface IElements {
@@ -40,4 +72,18 @@ export interface IElements {
   PatientState: string;
 }
 
-export const defaultWorklist: Array<IWorklistItem> = [];
+export const defaultWorklist: IWorklist = {
+  worklistData: {
+    data: [],
+    meta: {
+      currentPage: DEFAULT.page,
+      itemsPerPage: DEFAULT.limit,
+      totalItems: 0,
+      totalPages: 0,
+    },
+  },
+  queryParams: {
+    startDate: dayjs().startOf('date').toString(),
+    endDate: dayjs().endOf('date').toString(),
+  },
+};

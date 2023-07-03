@@ -17,9 +17,25 @@
       }
 
       * {
+        overflow: hidden;
         font-weight: 100;
         font-size: 100%;
         font-family: Roboto, sans-serif !important;
+      }
+
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      /* Track */
+      ::-webkit-scrollbar-track {
+        border-radius: 3px;
+      }
+
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background-color: cadetblue;
+        border-radius: 3px;
       }
     </style>
     <script id="build-version">

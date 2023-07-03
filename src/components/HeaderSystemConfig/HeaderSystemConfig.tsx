@@ -8,7 +8,7 @@ import {
 
 type Props = {};
 
-const handleChange = (value: string[]) => {
+const handleChange = (value: Array<string>) => {
   console.log(`selected ${value}`);
 };
 
@@ -54,7 +54,7 @@ const HeaderSystemConfig = (_props: Props) => {
             <Space style={{ width: '100%' }} direction="vertical">
               <Select
                 mode="multiple"
-                allowClear
+                allowClear={true}
                 style={{ width: '100%' }}
                 onChange={handleChange}
                 options={storageClassAccepted.map((item) => {
@@ -71,7 +71,7 @@ const HeaderSystemConfig = (_props: Props) => {
             <Space style={{ width: '100%' }} direction="vertical">
               <Select
                 mode="multiple"
-                allowClear
+                allowClear={true}
                 style={{ width: '100%' }}
                 onChange={handleChange}
                 options={sopClassAccepted.map((item) => {
@@ -88,7 +88,7 @@ const HeaderSystemConfig = (_props: Props) => {
             <Space style={{ width: '100%' }} direction="vertical">
               <Select
                 mode="multiple"
-                allowClear
+                allowClear={true}
                 style={{ width: '100%' }}
                 onChange={handleChange}
                 options={transcodableTransferSyntaxess.map((item) => {

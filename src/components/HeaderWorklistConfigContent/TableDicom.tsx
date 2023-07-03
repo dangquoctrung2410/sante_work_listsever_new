@@ -48,10 +48,12 @@ const TableDicom = (_props: Props) => {
           <EditOutlined
             onClick={() => handleUpdate(record)}
             style={{ color: 'blue' }}
+            rev={undefined}
           />
           <DeleteOutlined
             onClick={() => handleDelete(record)}
             style={{ color: 'red', padding: '0 5px', marginLeft: '50px' }}
+            rev={undefined}
           />
         </>
       ),

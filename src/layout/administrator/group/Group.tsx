@@ -40,7 +40,7 @@ const Group = (_props: Props) => {
         return (
           <Link to={record.id}>
             <Space align="center" direction="horizontal">
-              <GroupOutlined />
+              <GroupOutlined rev={undefined} />
               {record.name}
             </Space>
           </Link>

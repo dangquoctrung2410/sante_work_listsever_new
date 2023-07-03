@@ -3,6 +3,6 @@ export interface IThemeLanguage {
   language: string;
 }
 export const defaultThemeLanguage: IThemeLanguage = {
-  theme: { dark: false, color: '#1677ff', name: 'default' },
+  theme: { dark: true, color: '#1677ff', name: 'default' },
   language: 'vi',
 };

@@ -13,7 +13,9 @@ import { useEffect, useState } from 'react';
 import 'antd/dist/reset.css';
 // import Theme from './components/base/theme/Theme';
 // import ThemeMode from './components/base/theme/ThemeMode';
+import LoadingTopBar from './components/base/loading/LoadingTopBar';
 import i18n from './i18n';
+import WorklistPage from './pages/workslist/Worklist';
 import { setLanguge } from './reducers/slice/themeLanguageSlice';
 import {
   getStore,
@@ -22,14 +24,10 @@ import {
   useAppSelector,
 } from './redux/store';
 import { serviceConfig } from './services/serviceManager';
-import styleModule from './style.module.scss';
-import LoadingTopBar from './components/base/loading/LoadingTopBar';
-import WorklistPage from './pages/workslist/Worklist';
 // const { Text } = Typography;
 const { defaultAlgorithm, darkAlgorithm } = theme;
 
 const { useToken } = theme;
-
 const App = () => {
   const { token } = useToken();
   const [loading, setLoading] = useState(true);
@@ -44,7 +42,6 @@ const App = () => {
     setLoading(false);
   }, []);
 
-  console.log(token);
   return (
     <ConfigProvider
       theme={{
@@ -61,8 +58,12 @@ const App = () => {
     >
       <I18nextProvider i18n={i18n}>
         <div
-          className={styleModule.app}
-          style={{ background: token.colorBgBase }}
+          style={{
+            background: token.colorBgBase,
+            width: '100%',
+            height: '100vh',
+            position: 'relative',
+          }}
         >
           {!loading ? (
             <>

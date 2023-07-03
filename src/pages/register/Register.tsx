@@ -33,7 +33,7 @@ const Register = (_props: Props) => {
       <Space direction="vertical" align="center">
         <Avatar
           size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
-          icon={<AntDesignOutlined />}
+          icon={<AntDesignOutlined rev={undefined} />}
         />
 
         <Title level={4}>

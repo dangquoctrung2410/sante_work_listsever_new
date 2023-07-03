@@ -8,22 +8,5 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    .siderLeft {
-      height: 100%;
-      color: black;
-      padding: 15px 0 15px 15px;
-      background-color: #fff;
-      min-width: 90px !important;
-      max-width: 50px !important;
-      white-space: nowrap;
-    }
-    .mainContent {
-      width: calc(100% - 80px);
-      height: 100%;
-      background-color: #fff;
-      padding: 15px;
-      display: flex;
-      flex-direction: row;
-    }
   }
 }
