@@ -9,30 +9,29 @@ const { Content, Sider } = Layout;
 
 type Props = {};
 
-const Item = [
-  {
-    title: 'Worklist',
-    active: false,
-    content: <WorkListContent />,
-  },
-  {
-    title: 'Acquisition',
-    active: false,
-    content: <AcquissitonContent />,
-  },
-  {
-    title: 'Reviews',
-    active: false,
-    content: <ReviewContent />,
-  },
-  {
-    title: 'Config',
-    active: true,
-    content: <ConfigContent />,
-  },
-];
-
 const ContentHeaderSetup = (_props: Props) => {
+  const Item = [
+    {
+      title: 'Worklist',
+      active: false,
+      content: <WorkListContent />,
+    },
+    {
+      title: 'Acquisition',
+      active: false,
+      content: <AcquissitonContent />,
+    },
+    {
+      title: 'Reviews',
+      active: false,
+      content: <ReviewContent />,
+    },
+    {
+      title: 'Config',
+      active: true,
+      content: <ConfigContent />,
+    },
+  ];
   const [active, setActive] = useState(Item);
 
   const handleActiveButton = (index: any) => {
@@ -53,10 +52,10 @@ const ContentHeaderSetup = (_props: Props) => {
           <div className={styles.divChildren}>
             {active.map((item, index) => (
               <Button
+                key={index}
                 className={
                   item.active ? styles.buttonIconActive : styles.buttonIcon
                 }
-                key={index}
                 onClick={() => handleActiveButton(index)}
               >
                 {item.title}

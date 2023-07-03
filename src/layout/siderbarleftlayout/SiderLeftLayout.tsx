@@ -1,6 +1,20 @@
-import { SettingOutlined } from '@ant-design/icons';
+import {
+  BlockOutlined,
+  BookOutlined,
+  FolderOutlined,
+  InfoCircleOutlined,
+  PoweroffOutlined,
+  SettingOutlined,
+} from '@ant-design/icons';
 import { setOpenTbale } from '../../reducers/slice/tableSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
+// import { Paper } from '@mui/material';
+// import MenuList from '@mui/material/MenuList';
+// import MenuItem from '@mui/material/MenuItem';
+// import ListItemText from '@mui/material/ListItemText';
+// import ListItemIcon from '@mui/material/ListItemIcon';
+// import ContentCut from '@mui/icons-material/ContentCut';
+
 import styles from './Style.module.scss';
 import { Button, Tooltip } from 'antd';
 
@@ -12,36 +26,50 @@ const SiderLeftLayout = (_props: Props) => {
 
   return (
     <div className={styles.header}>
+      {/* <Paper sx={{ width: 100 }}>
+        <MenuList>
+          <MenuItem>
+            <ListItemIcon>
+              <ContentCut fontSize="small" />
+            </ListItemIcon>
+            <ListItemText>Setup</ListItemText>
+          </MenuItem>
+        </MenuList>
+      </Paper> */}
       <div className={styles.headerContent}>
-        <Tooltip placement="bottom" title={'Setup'}>
+        <Tooltip placement="right" title={'Setup'}>
           <div
             className={styles.headerItem}
             onClick={() => dispath(setOpenTbale(!openState))}
           >
-            <Button icon={<SettingOutlined />} type="primary"></Button>
+            <Button icon={<SettingOutlined />} />
           </div>
         </Tooltip>
-
-        <div className={styles.headerItem}>
-          <img src={process.env.PUBLIC_URL + '/log-in.png'} alt="" />
-          <span>Report</span>
-        </div>
-        <div className={styles.headerItem}>
-          <img src={process.env.PUBLIC_URL + '/log.png'} alt="" />
-          <span>Log Folder</span>
-        </div>
-        <div className={styles.headerItem}>
-          <img src={process.env.PUBLIC_URL + '/guide.png'} alt="" />
-          <span>Guide</span>
-        </div>
-        <div className={styles.headerItem}>
-          <img src={process.env.PUBLIC_URL + '/information.png'} alt="" />
-          <span>About</span>
-        </div>
-        <div className={styles.headerItem}>
-          <img src={process.env.PUBLIC_URL + '/icons8-off-64.png'} alt="" />
-          <span>Exit</span>
-        </div>
+        <Tooltip placement="left" title={'Report'}>
+          <div className={styles.headerItem}>
+            <Button icon={<BlockOutlined />} />
+          </div>
+        </Tooltip>
+        <Tooltip placement="left" title={'Log Folder'}>
+          <div className={styles.headerItem}>
+            <Button icon={<FolderOutlined />} />
+          </div>
+        </Tooltip>
+        <Tooltip placement="left" title={'Guide'}>
+          <div className={styles.headerItem}>
+            <Button icon={<BookOutlined />} />
+          </div>
+        </Tooltip>
+        <Tooltip placement="left" title={'About'}>
+          <div className={styles.headerItem}>
+            <Button icon={<InfoCircleOutlined />} />
+          </div>
+        </Tooltip>
+        <Tooltip placement="left" title={'Exit'}>
+          <div className={styles.headerItem}>
+            <Button icon={<PoweroffOutlined />} />
+          </div>
+        </Tooltip>
       </div>
     </div>
   );

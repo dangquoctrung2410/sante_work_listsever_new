@@ -1,5 +1,5 @@
 export interface IWorklistItem {
-  transferSyntaxUid: string;
+  status: number;
   elements: IElements;
 }
 
@@ -40,4 +40,32 @@ export interface IElements {
   PatientState: string;
 }
 
+export type IDataPatient = {
+  status: number;
+  data: {
+    data: Array<{
+      version: number;
+      createdAt: string;
+      updatedAt: string;
+      id: string;
+      modality: string;
+      patientId: string;
+      patientName: string;
+      patientCode: string;
+      serviceName: string;
+    }>;
+    meta: {
+      itemsPerPage: number;
+      totalItems: number;
+      currentPage: number;
+      totalPages: number;
+      sortBy: Array<Array<string>>;
+    };
+    links: {
+      current: string;
+    };
+  };
+};
+
+export const defaultDataPatient: Array<IDataPatient> = [];
 export const defaultWorklist: Array<IWorklistItem> = [];

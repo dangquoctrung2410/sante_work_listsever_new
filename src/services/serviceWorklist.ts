@@ -8,10 +8,51 @@ class ServiceWorklist extends ServiceBase {
     super(baseURL, onUnauthenticated, store);
   }
 
-  getWorklist = async () => {
-    const url = '/scp/modalityWorklist';
-    const response: IResponse<any> = await this.service.post(url);
-    return response.data;
+  getAllPatient = async (
+    pageindex?: number,
+    modality?: any,
+    patientName?: any,
+    sortBy?: any,
+  ) => {
+    const url = `/worklist?`;
+
+    const params = new URLSearchParams();
+
+    if (modality) {
+      params.set('filter.modality', `$eq:${modality}`);
+    }
+    if (pageindex) {
+      params.set('page', `${pageindex}`);
+    }
+    if (patientName) {
+      params.set('filter.patientName', `$ilike:${patientName}`);
+    }
+    if (sortBy) {
+      params.set('sortBy', `${sortBy}`);
+    }
+
+    const response: IResponse<any> = await this.service.get(
+      url + params.toString(),
+    );
+    return response.data.data;
+  };
+
+  deletePatient = async (id: any) => {
+    const url = `/worklist/${id}`;
+    const response = await this.service.delete(url);
+    return response.data.data;
+  };
+
+  updatePatient = async (id: any, data: any) => {
+    const url = `/worklist/${id}`;
+    const response = await this.service.patch(url, data);
+    return response.data.data;
+  };
+
+  createPatient = async (data: any) => {
+    const url = `/worklist`;
+    const response = await this.service.post(url, data);
+    return response.data.data;
   };
 
   potsWorklist = async (data: IItem) => {

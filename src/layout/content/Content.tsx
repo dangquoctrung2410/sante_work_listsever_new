@@ -1,12 +1,21 @@
-import { Button, Layout } from 'antd';
+import { Button, Form, Layout, Modal } from 'antd';
 import styles from './Style.module.scss';
 import Sidebars from '../sidebar/Sidebars';
 import Tables from '../../components/table/Table';
 // import type { DatePickerProps } from 'antd';
 import { DatePicker, Input, Row, Col } from 'antd';
-import { useState } from 'react';
-import { DeleteOutlined, SearchOutlined } from '@ant-design/icons';
-// import { useAppDispatch } from '../../redux/store';
+import { useEffect, useState } from 'react';
+import {
+  DeleteOutlined,
+  PlusSquareOutlined,
+  SearchOutlined,
+} from '@ant-design/icons';
+import { useAppDispatch } from '../../redux/store';
+import {
+  createPatient,
+  getAllPatient,
+} from '../../reducers/slice/worklistSlice';
+import FormItem from 'antd/es/form/FormItem';
 
 const { Header, Content } = Layout;
 const { RangePicker } = DatePicker;
@@ -14,32 +23,72 @@ const { RangePicker } = DatePicker;
 type Props = {};
 
 const Contents = (_props: Props) => {
-  // const dispath = useAppDispatch();
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
+  const dispatch = useAppDispatch();
   const [dataPatient, setDataPatient] = useState({
     patientName: '',
-    patientID: '',
-    startDate: '',
-    endDate: '',
+    modality: '',
+    // startDate: '',
+    // endDate: '',
   });
 
-  const handleSubmit = async () => {
+  useEffect(() => {
+    dispatch(
+      getAllPatient({
+        pageindex: 1,
+        modality: dataPatient.modality,
+        patientName: dataPatient.patientName,
+      }),
+    );
+  }, []);
+
+  const handleSearch = async () => {
     const res = await {
       patientName: dataPatient.patientName,
-      patientID: dataPatient.patientID,
-      startDate: dataPatient.startDate,
-      endDate: dataPatient.endDate,
+      modality: dataPatient.modality,
+      // startDate: dataPatient.startDate,
+      // endDate: dataPatient.endDate,
     };
-
     console.log(res);
+
+    dispatch(
+      getAllPatient({
+        pageindex: 1,
+        modality: dataPatient.modality,
+        patientName: dataPatient.patientName,
+      }),
+    );
   };
 
   const handleClearAll = () => {
     setDataPatient({
       patientName: '',
-      patientID: '',
-      startDate: '',
-      endDate: '',
+      modality: '',
+      // startDate: '',
+      // endDate: '',
     });
+  };
+
+  const handleButtonAdd = () => {
+    setIsOpenModal(!isOpenModal);
+  };
+
+  const onFinish = async (values: any) => {
+    const response = await dispatch(
+      createPatient({
+        patientId: values.patientId,
+        patientName: values.patientName,
+        patientCode: values.patientCode,
+        modality: values.modality,
+        serviceName: values.serviceName,
+      }),
+    );
+    console.log(response);
+  };
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
   };
 
   return (
@@ -69,31 +118,31 @@ const Contents = (_props: Props) => {
                 <Input
                   type="text"
                   prefix={<SearchOutlined />}
-                  placeholder="Patient ID"
-                  value={dataPatient.patientID}
+                  placeholder="Modality"
+                  value={dataPatient.modality}
                   onChange={(e) =>
                     setDataPatient({
                       ...dataPatient,
-                      patientID: e.target.value,
+                      modality: e.target.value,
                     })
                   }
                 />
               </Col>
               <Col className={styles.col} span={12}>
                 <RangePicker
-                  onChange={(date: any) =>
-                    setDataPatient({
-                      ...dataPatient,
-                      startDate: date[0].format(),
-                      endDate: date[1].format(),
-                    })
-                  }
+                // onChange={(date: any) =>
+                //   setDataPatient({
+                //     ...dataPatient,
+                //     startDate: date[0].format(),
+                //     endDate: date[1].format(),
+                //   })
+                // }
                 />
                 <Button
                   shape="round"
                   type="primary"
                   icon={<SearchOutlined />}
-                  onClick={handleSubmit}
+                  onClick={handleSearch}
                 >
                   Search
                 </Button>
@@ -106,12 +155,96 @@ const Contents = (_props: Props) => {
                 >
                   Clear All
                 </Button>
+                <Button
+                  style={{ marginLeft: '120px' }}
+                  type="primary"
+                  icon={<PlusSquareOutlined />}
+                  onClick={handleButtonAdd}
+                >
+                  Add
+                </Button>
               </Col>
             </Row>
             <Tables />
           </div>
         </Content>
       </Content>
+      <Modal
+        title="CREATE PATIENT"
+        open={isOpenModal}
+        onOk={() => {
+          setIsOpenModal(!isOpenModal);
+        }}
+        onCancel={() => {
+          setIsOpenModal(!isOpenModal);
+        }}
+        style={{
+          textAlign: 'center',
+          padding: '5px',
+          background: '#ffa940',
+          // ' linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%',
+          borderRadius: '5px',
+        }}
+      >
+        <Form
+          name="basic"
+          labelCol={{ span: 4 }}
+          wrapperCol={{ span: 18 }}
+          style={{
+            maxWidth: 600,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '10px',
+            marginTop: '20px',
+            borderRadius: '5px',
+          }}
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off"
+        >
+          <FormItem
+            label="patientId"
+            name="patientId"
+            rules={[{ message: 'Please input your username!' }]}
+          >
+            <Input />
+          </FormItem>
+          <FormItem
+            label="patientName"
+            name="patientName"
+            rules={[{ message: 'Please input your username!' }]}
+          >
+            <Input />
+          </FormItem>
+          <FormItem
+            label="patientCode"
+            name="patientCode"
+            rules={[{ message: 'Please input your username!' }]}
+          >
+            <Input />
+          </FormItem>
+          <FormItem
+            label="modality"
+            name="modality"
+            rules={[{ message: 'Please input your username!' }]}
+          >
+            <Input />
+          </FormItem>
+          <FormItem
+            label="serviceName"
+            name="serviceName"
+            rules={[{ message: 'Please input your username!' }]}
+          >
+            <Input />
+          </FormItem>
+          <FormItem wrapperCol={{ offset: 8, span: 8 }}>
+            <Button type="primary" htmlType="submit">
+              SUBMIT
+            </Button>
+          </FormItem>
+        </Form>
+      </Modal>
     </Content>
   );
 };
