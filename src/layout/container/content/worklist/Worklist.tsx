@@ -151,8 +151,7 @@ const Worklist = (_props: Props) => {
       visible: true,
       ellipsis: true,
     },
-    ,
-    ...column.filter((column) => column.visible),
+    ...column.filter((col) => col.visible),
   ];
 
   useEffect(() => {
@@ -211,10 +210,10 @@ const Worklist = (_props: Props) => {
           className={styles.tab}
           align="center"
         >
-          <Button icon={<DesktopOutlined rev={undefined} />}></Button>
-          <Button icon={<SettingOutlined rev={undefined} />}></Button>
-          <Button icon={<ClockCircleOutlined rev={undefined} />}></Button>
-          <Button icon={<AppstoreOutlined rev={undefined} />}></Button>
+          <Button icon={<DesktopOutlined rev={undefined} />} />
+          <Button icon={<SettingOutlined rev={undefined} />} />
+          <Button icon={<ClockCircleOutlined rev={undefined} />} />
+          <Button icon={<AppstoreOutlined rev={undefined} />} />
         </Space>
       </Sider>
 
